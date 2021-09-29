@@ -89,3 +89,4 @@ def printVisibleExits(currentRoom):
         roomExits.append("South")
     print(str(roomExits).replace('[', '').replace(']', ''))
 
+

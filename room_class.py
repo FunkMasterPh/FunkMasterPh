@@ -13,6 +13,11 @@ class Room:
         self._eastExit = None
         self._northExit = None
         self._southExit = None
+        self._dark = None
+    
+    #returns dark status on room
+    def getDark(self):
+        return self._dark
     
     #returns a description of the room
     def getRoomDesc(self):
@@ -22,6 +27,30 @@ class Room:
     def getObjects(self):
         if self._objects:
             return self._objects
+    
+    #returns west exit of a room
+    def getExitWest(self):
+        return self._westExit
+
+    #returns north exit of a room
+    def getExitNorth(self):
+        return self._northExit
+    
+    #returns south exit of a room
+    def getExitSouth(self):
+        return self._southExit
+
+    #returns east exit of a room
+    def getExitEast(self):
+        return self._eastExit
+    
+    #sets room to dark
+    def setDarkOn(self):
+        self._dark = True
+    
+    #sets room to not dark
+    def setDarkOff(self):
+        self._dark = False
 
     #sets west exit of a room
     def setExitWest(self, room: Room):
@@ -39,21 +68,6 @@ class Room:
     def setExitSouth(self, room: Room):
         self._southExit = room
 
-    #returns west exit of a room
-    def getExitWest(self):
-        return self._westExit
-
-    #returns north exit of a room
-    def getExitNorth(self):
-        return self._northExit
-    
-    #returns south exit of a room
-    def getExitSouth(self):
-        return self._southExit
-
-    #returns east exit of a room
-    def getExitEast(self):
-        return self._eastExit
 
     #def summonObjects(self):
         #return self._objects

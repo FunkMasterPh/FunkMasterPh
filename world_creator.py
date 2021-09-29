@@ -54,8 +54,10 @@ cave_1.setExitEast(cave_4)
 cave_2.setExitEast(cave_1)
 
 cave_3.setExitSouth(cave_1)
+cave_3.setDarkOn()
 
 cave_4.setExitWest(cave_1)
+
 
 
 
