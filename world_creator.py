@@ -26,20 +26,23 @@ sword1 = weapons.Sword()
 sword2 = weapons.Sword()
 sword3 = weapons.Sword()
 sword4 = weapons.Sword()
+sword5 = weapons.Sword()
 torch1 = misc.Torch()
+axe2 = weapons.Axe()
 
 
 """**********Creating Entities**********"""
-goblin1 = Goblin([sword1])
+goblin1 = Goblin([sword1, torch1, sword5])
 goblin2 = Goblin([sword2])
 goblin3 = Goblin([sword3])
 goblin4 = Goblin([sword4])
+troll1 = Troll([axe2])
 
 player = Character("Aragorn", [axe1, torch1])
 
 """**********World Creation**********"""
 
-cave_1 = Room("It's the first cave.", [goblin1])
+cave_1 = Room("It's the first cave.", [goblin1, troll1])
 cave_2 = Room("It's the second cave.", [goblin2])
 cave_3 = Room("It's the third cave.", [goblin3])
 cave_4 = Room("It's the fourth cave.", [goblin4])

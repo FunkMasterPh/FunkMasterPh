@@ -60,7 +60,10 @@ def parsePlayerCommand(playerCommand, currentRoom):
     elif command[0] == cmd._INVENTORY:
         cmd.checkInventory()
     elif command[0] == cmd._LOOT:
-        cmd.loot(command[1], currentRoom)
+        if cmd.loot(currentRoom):
+            print("You loot the body.")
+        else:
+            print("Nothing to loot.")
         
 
 

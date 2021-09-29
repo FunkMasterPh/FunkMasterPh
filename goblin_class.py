@@ -22,6 +22,7 @@ class Troll(Monster):
         self._dex = 1
         self._type = "Troll"
         self._desc = "Disfigured and smells funky"
+        self._inventory = inventory
     
 class Orc(Monster):
     def __init__(self, inventory: list):

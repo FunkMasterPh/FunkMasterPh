@@ -131,6 +131,7 @@ def lookAt(command, currentRoom):
     else:
         print("Lets examine stuff!")
 
+
 def wieldWeapon(item):
     for weapon in player.getInventory():
         if weapon.getType().lower() == item.lower():
@@ -179,18 +180,20 @@ def dropItem(item_to_drop, currentRoom):
             return True
 
 
+
 def checkInventory():
     print("You're carrying the following items:")
     for item in player.getInventory():
         print(item.getType().title())
 
-def loot(target, currentRoom):
+
+
+def loot(currentRoom):
     for object in currentRoom.getObjects():
-        if object.getType().lower() == target.lower():
-            if object.getIsAlive():
-                print("You can´t loot a living creature!")
-            else:
-                print("U Loot")
-        else:
-            print("No such thing in the room...")
+        if object.getObjectType() == "monster" and object.getIsAlive() == False and object.getInventory():
+            while object.getInventory():
+                loot = object.getInventory().pop()
+                player.getInventory().append(loot)
+            return True
+        
 

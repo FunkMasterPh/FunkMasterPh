@@ -2,7 +2,6 @@ fixa resten av kommandona:
 
 _EQUIP_ITEM = "equip"
 _UNEQUIP_ITEM = "unequip"
-_LOOT = "loot"
 _CONSUME_ITEM = "consume"
 _LIGHT = "light"
 _EXTINGUISH = "extinguish"

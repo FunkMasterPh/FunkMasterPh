@@ -46,7 +46,7 @@ class Axe(Weapon):
         self._weight = 10
         self._value = 20
         self._type = "Axe"
-        self._damage = 12
+        self._damage = 100
 
 class Crossbow(Weapon):
     def __init__(self):
