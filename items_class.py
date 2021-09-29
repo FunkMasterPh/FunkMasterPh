@@ -47,6 +47,7 @@ class Misc(Item):
         super().__init__()
         self._desc = None
         self._itemType = Misc
+    
     def getDesc(self):
         return self._desc
 

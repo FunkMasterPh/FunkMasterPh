@@ -195,6 +195,18 @@ def loot(currentRoom):
                 loot = object.getInventory().pop()
                 player.getInventory().append(loot)
             return True
+
+
+def light(item):
+    for object in player.getInventory():
+        if object.getType().lower() == item.lower():
+            if item.lower() == "torch":
+                return True
+            else:
+                print("You can´t light that...")
+                return False
+    else:
+        print("I don´t have that...")
+
         
-# LETS CONTINUE FROM HERE TOMORROW
-#Yes we will!
+

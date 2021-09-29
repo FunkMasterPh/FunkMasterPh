@@ -64,6 +64,9 @@ def parsePlayerCommand(playerCommand, currentRoom):
             print("You loot the body.")
         else:
             print("Nothing to loot.")
+    elif command[0] == cmd._LIGHT:
+        if cmd.light(command[1]):
+            print("You light the torch")
         
 
 

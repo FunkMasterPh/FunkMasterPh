@@ -32,13 +32,13 @@ axe2 = weapons.Axe()
 
 
 """**********Creating Entities**********"""
-goblin1 = Goblin([sword1, torch1, sword5])
+goblin1 = Goblin([sword5])
 goblin2 = Goblin([sword2])
 goblin3 = Goblin([sword3])
 goblin4 = Goblin([sword4])
 troll1 = Troll([axe2])
 
-player = Character("Aragorn", [axe1, torch1])
+player = Character("Aragorn", [axe1, sword1])
 
 """**********World Creation**********"""
 
