@@ -67,6 +67,9 @@ def parsePlayerCommand(playerCommand, currentRoom):
     elif command[0] == cmd._LIGHT:
         if cmd.light(command[1]):
             print("You light the torch")
+    elif command[0] == cmd._EXTINGUISH:
+        if cmd.extinguish():
+            print("You put out the torch.")
         
 
 

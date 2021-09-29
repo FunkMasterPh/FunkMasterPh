@@ -7,6 +7,20 @@ class Torch(Misc):
         self._value = 5
         self._type = "torch"
         self._desc ="A stick on fire. "
+        self._isOn = False
+    
+    
+    def getOn(self):
+        return self._isOn
+    
+
+    def setOn(self):
+        self._isOn = True
+    
+
+    def setOff(self):
+        self._isOn = False
+
 
 class Monocle(Misc):
     def __init__(self):

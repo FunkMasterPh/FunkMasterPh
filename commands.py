@@ -201,12 +201,26 @@ def light(item):
     for object in player.getInventory():
         if object.getType().lower() == item.lower():
             if item.lower() == "torch":
-                return True
+                if object.getOn() != True:
+                    object.setOn()
+                    return True
+                else:
+                    print("The torch is already lit.")
+                    return False
             else:
                 print("You can´t light that...")
                 return False
     else:
         print("I don´t have that...")
+
+
+def extinguish():
+    for object in player.getInventory():
+        if object.getType() == "torch" and object.getOn():
+            object.setOff()
+            return True
+    else:
+        print("There is nothing to extinguish...")
 
         
 
