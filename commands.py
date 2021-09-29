@@ -197,3 +197,4 @@ def loot(currentRoom):
             return True
         
 # LETS CONTINUE FROM HERE TOMORROW
+#Yes we will!
