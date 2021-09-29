@@ -9,15 +9,15 @@ class Torch(Misc):
         self._desc ="A stick on fire. "
         self._isOn = False
     
-    
+    #returns on/off status of torch
     def getOn(self):
         return self._isOn
     
-
+    #sets torch status to on
     def setOn(self):
         self._isOn = True
     
-
+    #sets torch status to off
     def setOff(self):
         self._isOn = False
 

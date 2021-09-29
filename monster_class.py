@@ -12,51 +12,61 @@ class Monster:
         self._corpse = "decomposing body"
         self._corpseDesc = None
         self._objectType = "monster"
+    
+    #returns monster health
+    def getHP(self):
+        return self._hp
 
-    def setIsAlive(self, arg):
-        self._isAlive = arg
+    #returns monster dexterity
+    def getDex(self):
+
+        return self._dex
     
-    def getIsAlive(self):
-        return self._isAlive
-        
-    def setType(self, type):
-        self._type = type
-    
+    #returns what type of object this is
     def getObjectType(self):
         return self._objectType
-
+    
+    #returns a monster type if monster is alive, if dead returns a corpse
     def getType(self):
         if self._isAlive == True:
             return self._type
         else:
             return self._corpse
-
+    
+    #returns a description of monster if monster is alive, if dead returns a description of corpse
     def getDesc(self):
         if self._isAlive == True:
             return self._desc
         else:
             return self._corpseDesc
-    
-    def getHP(self):
-        return self._hp
 
-    def getDex(self):
-
-        return self._dex
+    #returns monster dead/alive status
+    def getIsAlive(self):
+        return self._isAlive
     
+    #returns monsters inventory
+    def getInventory(self):
+        return self._inventory
+    
+    #changes monster dead/alive status
+    def setIsAlive(self, arg):
+        self._isAlive = arg
+        
+    #changes monsters type
+    def setType(self, type):
+        self._type = type
+    
+    #changes monsters inventory
+    def setInventory(self, inventory: list):   
+        self._inventory = inventory
+    
+    #allows monster to take damage
     def takeDamage(self, dmg):
         
         self._hp = self._hp - dmg
         return dmg
 
-    def setInventory(self, inventory: list):
-        # To-Do    
-        self._inventory = inventory
-
-    def getInventory(self):
-        # To-Do
-        return self._inventory
-
+    #allows monster to do damage
     def doDamage(self):
 
         return self._str

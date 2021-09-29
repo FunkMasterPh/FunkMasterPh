@@ -4,14 +4,14 @@ from monster_class import Monster
 import commands as cmd
 from world_creator import *
 
-
+#function for printing information about the room the player is in
 def printInterface(currentRoom):
     print(currentRoom.getRoomDesc())
     for object in currentRoom.getObjects():
         print(f"A "+object.getType() +".")
     printVisibleExits(currentRoom)    
 
-
+#function for taking and handling user input
 def parsePlayerCommand(playerCommand, currentRoom):
 
     command = playerCommand.strip().split()
@@ -24,7 +24,7 @@ def parsePlayerCommand(playerCommand, currentRoom):
     elif command[0] == cmd._ATTACK:
         if not cmd.attack(command[1], currentRoom):
             print("No such target.")
-    elif command[0] == cmd._GO:
+    elif command[0] == cmd._GO:                                    
         newCurrentRoom = cmd.movePlayer(command[1], currentRoom)
         if newCurrentRoom != None:
             return newCurrentRoom
@@ -75,7 +75,7 @@ def parsePlayerCommand(playerCommand, currentRoom):
 
     return currentRoom
 
-
+#function for printing all visible exits in a room
 def printVisibleExits(currentRoom):
     roomExits = []
     print("Visible exits: ", end='')

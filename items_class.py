@@ -5,19 +5,24 @@ class Item:
         self._type = None
         self._itemType = None
         self._objectType = "item"
-      
+    
+    #method for getting type desciption
     def getType(self):
         return self._type
 
+    #method for getting item value
     def getValue(self):
         return self._value
 
+    #method for getting item weight
     def getWeight(self):
         return self._weight
 
+    #method for getting what type of item 
     def getItemType(self):
         return self._itemType
-        
+
+    #method for getting what type of object  
     def getObjectType(self):
         return self._objectType
 
@@ -27,7 +32,8 @@ class Weapon(Item):
         super().__init__()
         self._damage = None
         self._itemType = Weapon
-
+    
+    #returns weapon damage
     def getDamage(self):
         return self._damage
    
@@ -38,6 +44,7 @@ class Armor(Item):
         self._armor = None
         self._itemType = Armor
 
+    #returns armor stats
     def getStat(self):
         return self._armor
         
@@ -47,7 +54,8 @@ class Misc(Item):
         super().__init__()
         self._desc = None
         self._itemType = Misc
-    
+
+    #returns description of item  
     def getDesc(self):
         return self._desc
 
@@ -60,6 +68,8 @@ class Potion(Item):
         self._effect = effect
         self._potency = potency
         self._itemType = Potion
+    
+    #returns item description
     def getDesc(self):
         return self._desc
 

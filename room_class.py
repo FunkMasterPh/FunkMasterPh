@@ -1,8 +1,8 @@
 from __future__ import annotations
 from monster_class import Monster
 from goblin_class import *
-#import room_test
 
+#template for creating a room object
 class Room:
 
     def __init__(self, roomDesc, objects: list):
@@ -14,44 +14,49 @@ class Room:
         self._northExit = None
         self._southExit = None
     
-
+    #returns a description of the room
     def getRoomDesc(self):
-        
         return self._roomDesc
 
+    #if there are objects in the room it returns them
     def getObjects(self):
         if self._objects:
             return self._objects
-            
-    def summonObjects(self):
-        # To-Do
-        return self._objects
-    
-    def getNextRoom(self, current_room):
 
-        return None
-
+    #sets west exit of a room
     def setExitWest(self, room: Room):
         self._westExit = room
     
+    #sets north exit of a room
     def setExitNorth(self, room: Room):
         self._northExit = room
 
+    #sets east exit of a room
     def setExitEast(self, room: Room):
         self._eastExit = room
     
+    #sets south exit of a room
     def setExitSouth(self, room: Room):
         self._southExit = room
 
+    #returns west exit of a room
     def getExitWest(self):
         return self._westExit
 
+    #returns north exit of a room
     def getExitNorth(self):
         return self._northExit
     
+    #returns south exit of a room
     def getExitSouth(self):
         return self._southExit
 
+    #returns east exit of a room
     def getExitEast(self):
         return self._eastExit
 
+    #def summonObjects(self):
+        #return self._objects
+
+    #def getNextRoom(self, current_room):
+        #return None

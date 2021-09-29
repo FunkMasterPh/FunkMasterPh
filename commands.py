@@ -93,14 +93,14 @@ def movePlayer(userMovement, currentRoom):
         print("You can't go there.")
 
 
-
+#checks if target is in room and if true calls on fight function
 def attack(target, currentRoom):
     for object in currentRoom.getObjects():
         if object.getType().lower() == target.lower():
             fight.letsFight(player, object)
             return True
         
-            
+#checks what potion you want to drink and alters stats accordingly           
 def consume(self, item):
     if Potion.getDesc() == [0]:
         self._hp += item.getHP()
@@ -117,21 +117,21 @@ def consume(self, item):
     else:
         return False
 
-
+#prints the inventory of target monster
 def examineMonster(monster):
     print(monster.getDesc())
     print("It's carrying: ")
     for item in monster.getInventory():
         print(item.getType())
 
-
+#takes user input and prints info about it
 def lookAt(command, currentRoom):
     if command == "room":
         library.printInterface(currentRoom)
     else:
         print("Lets examine stuff!")
 
-
+#checks if you have weapon in inventory, if it is a weapon and if all true changes wielded status accordingly
 def wieldWeapon(item):
     for weapon in player.getInventory():
         if weapon.getType().lower() == item.lower():
@@ -147,7 +147,7 @@ def wieldWeapon(item):
     else:
         print("I don't have that item.")    
         
-
+#checks if you have a wielded weapon and unwields if true
 def unwieldWeapon(item):
     for weapon in player.getInventory():
         if weapon.getType().lower() == item.lower():
@@ -157,7 +157,7 @@ def unwieldWeapon(item):
             else: 
                 return False
 
-
+#checks if item is in room, if true removes from room inventory and adds to player inventory
 def takeItem(item_to_take, currentRoom):
     for item in currentRoom.getObjects():
         if item.getObjectType() == "item":
@@ -168,7 +168,7 @@ def takeItem(item_to_take, currentRoom):
                 return True
             
 
-
+#checks if item is on player, if true removes from player inventory and adds to room inventory
 def dropItem(item_to_drop, currentRoom):
     for item in player.getInventory():
         if item.getType().lower() == item_to_drop.lower():
@@ -180,14 +180,14 @@ def dropItem(item_to_drop, currentRoom):
             return True
 
 
-
+#prints player inventory
 def checkInventory():
     print("You're carrying the following items:")
     for item in player.getInventory():
         print(item.getType().title())
 
 
-
+#checks if monsters are dead and adds their inventory to player inventory
 def loot(currentRoom):
     for object in currentRoom.getObjects():
         if object.getObjectType() == "monster" and object.getIsAlive() == False and object.getInventory():
@@ -196,7 +196,7 @@ def loot(currentRoom):
                 player.getInventory().append(loot)
             return True
 
-
+#checks if you have torch in inventory, if true lights it
 def light(item):
     for object in player.getInventory():
         if object.getType().lower() == item.lower():
@@ -213,7 +213,7 @@ def light(item):
     else:
         print("I don´t have that...")
 
-
+#checks if torch is in player inventory and extinguishes if its lit
 def extinguish():
     for object in player.getInventory():
         if object.getType() == "torch" and object.getOn():

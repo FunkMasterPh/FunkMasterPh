@@ -4,7 +4,7 @@ from character_class import Character
 import random
 import time
 
-
+#randomises the chance to hit your target based on character and monster dexterity level
 def chanceToHit(attacker, defender):
 
    if random.randint(1, attacker.getDex()) >= random.randint(1, defender.getDex()):
@@ -12,7 +12,7 @@ def chanceToHit(attacker, defender):
 
  
 
-
+#starts a combat loop where if monster is defeated it sets monster alive status to false and it gives player experience
 def letsFight(player, monster):
     while True:
         if chanceToHit(player, monster):

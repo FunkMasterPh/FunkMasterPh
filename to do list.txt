@@ -3,8 +3,6 @@ fixa resten av kommandona:
 _EQUIP_ITEM = "equip"
 _UNEQUIP_ITEM = "unequip"
 _CONSUME_ITEM = "consume"
-_LIGHT = "light"
-_EXTINGUISH = "extinguish"
 _QUIT = "quit"
 
 
@@ -12,7 +10,7 @@ spara karaktär i textfil
 
 fixa index out of range i kommandon 
 
-kommentera upp koden
+kommentera upp koden (typ gjort)
 
 utveckla xp system
 
