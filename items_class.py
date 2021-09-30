@@ -5,6 +5,7 @@ class Item:
         self._type = None
         self._itemType = None
         self._objectType = "item"
+        self._desc = None
     
     #method for getting type desciption
     def getType(self):
@@ -25,6 +26,9 @@ class Item:
     #method for getting what type of object  
     def getObjectType(self):
         return self._objectType
+
+    def getDesc(self):
+        return self._desc
 
 
 class Weapon(Item):

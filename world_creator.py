@@ -34,17 +34,17 @@ axe2 = weapons.Axe()
 """**********Creating Entities**********"""
 goblin1 = Goblin([sword5])
 goblin2 = Goblin([sword2])
-goblin3 = Goblin([sword3])
+goblin3 = Goblin([])
 goblin4 = Goblin([sword4])
-troll1 = Troll([axe2])
+troll1 = Troll([])
 
 player = Character("Aragorn", [axe1, sword1, torch1])
 
 """**********World Creation**********"""
 
 cave_1 = Room("It's the first cave.", [goblin1, troll1])
-cave_2 = Room("It's the second cave.", [goblin2])
-cave_3 = Room("It's the third cave.", [goblin3])
+cave_2 = Room("It's the second cave.", [goblin2, sword3])
+cave_3 = Room("It's the third cave.", [goblin3, axe2])
 cave_4 = Room("It's the fourth cave.", [goblin4])
 
 cave_1.setExitWest(cave_2)
@@ -54,7 +54,7 @@ cave_1.setExitEast(cave_4)
 cave_2.setExitEast(cave_1)
 
 cave_3.setExitSouth(cave_1)
-cave_3.setDarkOn()
+cave_3.setDark(True)
 
 cave_4.setExitWest(cave_1)
 

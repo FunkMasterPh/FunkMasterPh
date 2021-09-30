@@ -96,11 +96,12 @@ def movePlayer(userMovement, currentRoom):
 
 def attack(target, currentRoom):
     """Checks if target is in room and if true calls the letsFight() function."""
-    for object in currentRoom.getObjects():
-        if object.getType().lower() == target.lower():
-            fight.letsFight(player, object)
-            return True
-        
+    print(currentRoom)
+    if library.canPlayerSee(currentRoom):
+        for object in currentRoom.getObjects():
+            if object.getType().lower() == target.lower():
+                fight.letsFight(player, object)
+                return True
        
 def consume(self, item):
     """Checks what potion you want to drink and alters stats accordingly."""
@@ -119,7 +120,6 @@ def consume(self, item):
     else:
         return False
 
-
 def examineMonster(monster):
     """Prints the description and inventory of target monster."""
     print(monster.getDesc())
@@ -128,15 +128,30 @@ def examineMonster(monster):
         print(item.getType())
 
 #takes user input and prints info about it
-def lookAt(command, currentRoom):
-    if command == "room":
+def examine(toLookAt, currentRoom):
+
+    if toLookAt == "room":
         library.printInterface(currentRoom)
-    else:
-        print("Lets examine stuff!")
+    
+    else :
+        for object in currentRoom.getObjects():
+            if object.getType().lower() == toLookAt.lower():
+                if object.getObjectType() == "monster":
+                    examineMonster(object)
+                elif object.getObjectType() == "item":
+                    print(object.getDesc())
 
-
+        for object in player.getInventory():
+            if object.getType().lower() == toLookAt.lower():
+                if object.getObjectType() == "monster":
+                    examineMonster(object)
+                elif object.getObjectType() == "item":
+                    print(object.getDesc())       
+            
+    
 def wieldWeapon(item):
-    """Checks if you have weapon in inventory, if it is a weapon and if all true changes wielded status accordingly."""
+    """Checks if you have weapon in inventory, if it is a weapon and if all 
+       true changes wielded status accordingly."""
     for weapon in player.getInventory():
         if weapon.getType().lower() == item.lower():
             if weapon.getItemType() == Weapon:
@@ -195,7 +210,7 @@ def checkInventory():
 
 
 
-def loot(currentRoom):
+def loot(currentRoom, itemToLoot):
     """Checks if monsters are dead and adds their inventory to player inventory."""
     for object in currentRoom.getObjects():
         if object.getObjectType() == "monster" and object.getIsAlive() == False and object.getInventory():
@@ -205,33 +220,30 @@ def loot(currentRoom):
             return True
 
 
-def light(item, currentRoom):
+def light(item):
     """Checks if you have torch in inventory, lights it if true."""
     for object in player.getInventory():
         if object.getType().lower() == item.lower():
             if item.lower() == "torch":
                 if object.getOn() != True:
-                    object.setOn()
-                    currentRoom.setDarkOff()
+                    object.setOnOff(True)
+                    player.setIlluminated(True)
                     return True
                 else:
                     print("The torch is already lit.")
                     return False
             else:
-                print("You can´t light that...")
+                print("You can't light that.")
                 return False
     else:
-        print("I don´t have that...")
+        print("I don´t have that.")
 
-def extinguish(currentRoom):
+def extinguish(item):
     """Checks if torch is in player inventory and extinguishes if its lit."""
     for object in player.getInventory():
-        if object.getType() == "torch" and object.getOn():
-            object.setOff()
-            currentRoom.setDarkOn()
-            return True
-    else:
-        print("There is nothing to extinguish...")
-
-        
-
+        if object.getType().lower() == item.lower():
+            if object.getType() == "torch" and object.getOn():
+                object.setOnOff(False)
+                player.setIlluminated(False)
+                return True
+            

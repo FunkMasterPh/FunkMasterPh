@@ -6,6 +6,7 @@ class Sword(Weapon):
         self._weight = 10
         self._value = 20
         self._type = "Sword"
+        self._desc = "Excalibur"
         self._damage = 10
 
 class Dagger(Weapon):
@@ -46,6 +47,7 @@ class Axe(Weapon):
         self._weight = 10
         self._value = 20
         self._type = "Axe"
+        self._desc = "An axe with a wooden handle"
         self._damage = 100
 
 class Crossbow(Weapon):

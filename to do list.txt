@@ -5,10 +5,11 @@ _UNEQUIP_ITEM = "unequip"
 _CONSUME_ITEM = "consume"
 _QUIT = "quit"
 
+fixa try except
 
 spara karaktär i textfil
 
-fixa index out of range i kommandon 
+fixa index out of range i kommandon
 
 kommentera upp koden (typ gjort)
 
@@ -20,6 +21,7 @@ merchant
 
 städa upp
 
+planera upp spelet
 
 
 in case of time:

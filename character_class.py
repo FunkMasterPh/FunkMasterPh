@@ -14,9 +14,15 @@ class Character:
         self._xp = 0
         self._inventory = item
         self._wielded = False
+        self._illuminated = False
         #self._head = None
         #self._chest = None
         #self._legs = None
+
+
+    """returns illuminated status"""
+    def getIlluminated(self):
+        return self._illuminated
         
     #method for getting character name
     def getName(self):
@@ -53,6 +59,9 @@ class Character:
     #method for getting character wielded status
     def getWielded(self):
         return self._wielded
+
+    def setIlluminated(self, arg):
+        self._illuminated = arg
 
     #method for changing character experience 
     def setXP(self, XP):

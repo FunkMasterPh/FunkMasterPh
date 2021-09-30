@@ -14,13 +14,8 @@ class Torch(Misc):
         return self._isOn
     
     #sets torch status to on
-    def setOn(self):
-        self._isOn = True
-    
-    #sets torch status to off
-    def setOff(self):
-        self._isOn = False
-
+    def setOnOff(self, arg):
+        self._isOn = arg
 
 class Monocle(Misc):
     def __init__(self):

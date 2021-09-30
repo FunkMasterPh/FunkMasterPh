@@ -13,7 +13,7 @@ class Room:
         self._eastExit = None
         self._northExit = None
         self._southExit = None
-        self._dark = None
+        self._dark = False
     
     #returns dark status on room
     def getDark(self):
@@ -45,13 +45,9 @@ class Room:
         return self._eastExit
     
     #sets room to dark
-    def setDarkOn(self):
-        self._dark = True
+    def setDark(self, lightStatus):
+        self._dark = lightStatus
     
-    #sets room to not dark
-    def setDarkOff(self):
-        self._dark = False
-
     #sets west exit of a room
     def setExitWest(self, room: Room):
         self._westExit = room
