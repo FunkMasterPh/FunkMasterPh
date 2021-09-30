@@ -197,12 +197,13 @@ def loot(currentRoom):
             return True
 
 #checks if you have torch in inventory, if true lights it
-def light(item):
+def light(item, currentRoom):
     for object in player.getInventory():
         if object.getType().lower() == item.lower():
             if item.lower() == "torch":
                 if object.getOn() != True:
                     object.setOn()
+                    currentRoom.setDarkOff()
                     return True
                 else:
                     print("The torch is already lit.")
@@ -214,10 +215,11 @@ def light(item):
         print("I don´t have that...")
 
 #checks if torch is in player inventory and extinguishes if its lit
-def extinguish():
+def extinguish(currentRoom):
     for object in player.getInventory():
         if object.getType() == "torch" and object.getOn():
             object.setOff()
+            currentRoom.setDarkOn()
             return True
     else:
         print("There is nothing to extinguish...")

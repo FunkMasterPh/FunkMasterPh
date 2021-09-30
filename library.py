@@ -6,10 +6,13 @@ from world_creator import *
 
 #function for printing information about the room the player is in
 def printInterface(currentRoom):
-    print(currentRoom.getRoomDesc())
-    for object in currentRoom.getObjects():
-        print(f"A "+object.getType() +".")
-    printVisibleExits(currentRoom)    
+    if currentRoom.getDark():
+        print("Its to dark to see...")
+    else:
+        print(currentRoom.getRoomDesc())
+        for object in currentRoom.getObjects():
+            print(f"A "+object.getType() +".")
+        printVisibleExits(currentRoom)    
 
 #function for taking and handling user input
 def parsePlayerCommand(playerCommand, currentRoom):
@@ -65,10 +68,10 @@ def parsePlayerCommand(playerCommand, currentRoom):
         else:
             print("Nothing to loot.")
     elif command[0] == cmd._LIGHT:
-        if cmd.light(command[1]):
+        if cmd.light(command[1], currentRoom):
             print("You light the torch")
     elif command[0] == cmd._EXTINGUISH:
-        if cmd.extinguish():
+        if cmd.extinguish(currentRoom):
             print("You put out the torch.")
         
 
@@ -88,5 +91,4 @@ def printVisibleExits(currentRoom):
     if currentRoom.getExitSouth():
         roomExits.append("South")
     print(str(roomExits).replace('[', '').replace(']', ''))
-
 
