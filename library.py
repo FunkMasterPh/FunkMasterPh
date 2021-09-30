@@ -15,7 +15,6 @@ def printInterface(currentRoom):
         printVisibleExits(currentRoom)    
 
 def canPlayerSee(currentRoom):
-    print(currentRoom)
     """Checks if room is lit, returns desc if true. If room is not lit, checks if
        player has a lit torch in inventory. If so, displays the room's description.
        If all fails, room is too dark to see."""
@@ -44,54 +43,71 @@ def parsePlayerCommand(playerCommand, currentRoom):
                 return newCurrentRoom
             else:
                 return currentRoom
+
         elif command[0] == cmd._EXAMINE:
             print("Looking...")
             time.sleep(1)
             cmd.examine(command[1], currentRoom)
+
         elif command[0] == cmd._STATUS:
             hp = player.getHP()
             dex = player.getDex()
             stren = player.getStr()
             print(f"You have {hp} health and {dex} dexterity and {stren} strength")
+
         elif command[0] == cmd._WIELD_ITEM:
             if cmd.wieldWeapon(command[1]):
                 print(f"You wielded {command[1]}.")
+
         elif command[0] == cmd._UNWIELD_ITEM:
             if cmd.unwieldWeapon(command[1]):
                 print(f"You unwielded {command[1]}.")
             else:
                 print("You're not wielding that item.")
+
         elif command[0] == cmd._TAKE_ITEM:
             if cmd.takeItem(command[1], currentRoom):
                 print(f"You take {command[1]}.")
             else:
                 print("You can't take that.")  
+
         elif command[0] == cmd._DROP_ITEM:
             if cmd.dropItem(command[1], currentRoom):
                 print(f"You dropped {command[1]}.")       
             else:
                 print("You don't have that item.")
+
         elif command[0] == cmd._INVENTORY:
             cmd.checkInventory()
+
         elif command[0] == cmd._LOOT:
             if cmd.loot(currentRoom, command[1]):
                 print("You loot the body.")
             else:
                 print("Nothing to loot.")
+
         elif command[0] == cmd._LIGHT:
             if cmd.light(command[1]):
                 print("You light the torch.")
+
         elif command[0] == cmd._EXTINGUISH:
             if cmd.extinguish(command[1]):
                 print("You put out the torch.")
             else:
                 print("There is nothing to extinguish.")    
+        elif command[0] == cmd._EQUIP_ITEM:
+            if cmd.equip(command[1]):
+                print(f"You equipped {command[1]}.")
+        elif command[0] == cmd._UNEQUIP_ITEM:
+            if cmd.unEquip(command[1]):
+                print(f"You unequipped {command[1]}")
 
         return currentRoom
         
                 
     except IndexError:
         print(f"{command[0].title()} what?")
+        return currentRoom
         
 
 #function for printing all visible exits in a room

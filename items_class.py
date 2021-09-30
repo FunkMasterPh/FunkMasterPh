@@ -37,20 +37,29 @@ class Weapon(Item):
         self._damage = None
         self._itemType = Weapon
     
-    #returns weapon damage
     def getDamage(self):
+        """Returns weapon damage."""
         return self._damage
    
-   
+  
 class Armor(Item):
-    def __init__(self):
+    def __init__(self, type, armorLocation, damageMitigation):
         super().__init__()
         self._armor = None
         self._itemType = Armor
+        self._type = type
+        self._armorLocation = armorLocation
+        self._damageMitigation = damageMitigation
 
-    #returns armor stats
-    def getStat(self):
-        return self._armor
+    
+    def getArmorLocation(self):
+        """Returns armor location."""
+        return self._armorLocation
+        
+    
+    def getDamageMitigation(self):
+        """Returns damage mitigation."""
+        return self._damageMitigation
         
 
 class Misc(Item):
@@ -77,13 +86,5 @@ class Potion(Item):
     def getDesc(self):
         return self._desc
 
-
-potion_types =     [
-                    "health", 
-                    "strength",
-                    "dexterity",
-                    "experience", 
-                    "invisibility"
-                    ]
 
 

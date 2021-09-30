@@ -15,11 +15,9 @@ class Character:
         self._inventory = item
         self._wielded = False
         self._illuminated = False
-        #self._head = None
-        #self._chest = None
-        #self._legs = None
-
-
+        self._head = False
+        self._chest = False
+        
     """returns illuminated status"""
     def getIlluminated(self):
         return self._illuminated
@@ -59,6 +57,25 @@ class Character:
     #method for getting character wielded status
     def getWielded(self):
         return self._wielded
+    
+    def isEquipped(self, arg):
+        if arg == "helmet":
+            return self._head
+        elif arg == "chestplate":   
+            return self._chest
+    
+    def setEquipArmor(self, arg):
+        if arg == "helmet":
+            self._head = True
+        elif arg == "chestplate":
+            self._chest = True
+
+    def setUneqiupArmor(self, arg):
+        if arg == "helmet":
+            self._head = None
+        elif arg == "chestplate":
+            self._chest = None
+    
 
     def setIlluminated(self, arg):
         self._illuminated = arg
@@ -95,7 +112,7 @@ class Character:
     
     #method for character to do damage
     def doDamage(self):
-        return (random.randint(1, (self._str + self._damageModifier)))
+        return (random.randint(1, (self._str + self._damageModifier )))
     
     #method for character to level up       
     def levelUp(self):

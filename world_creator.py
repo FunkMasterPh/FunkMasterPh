@@ -3,6 +3,7 @@ from character_class import Character
 from room_class import *
 from goblin_class import *
 from items_class import *
+from potion import *
 import time
 import library
 import random
@@ -11,15 +12,8 @@ import commands
 
 
 """**********Creating All Items**********"""
-potion_types =     [
-                    "health", 
-                    "strength",
-                    "dexterity",
-                    "experience", 
-                    "invisibility"
-                    ]
 
-potion1 = Potion(15, potion_types[3])
+
 
 axe1 = weapons.Axe()
 sword1 = weapons.Sword()
@@ -29,7 +23,8 @@ sword4 = weapons.Sword()
 sword5 = weapons.Sword()
 torch1 = misc.Torch()
 axe2 = weapons.Axe()
-
+helmet1 = Armor('helmet', 'head', 2)
+chestplate1 = Armor('chestplate', 'chest', 3)
 
 """**********Creating Entities**********"""
 goblin1 = Goblin([sword5])
@@ -38,7 +33,7 @@ goblin3 = Goblin([])
 goblin4 = Goblin([sword4])
 troll1 = Troll([])
 
-player = Character("Aragorn", [axe1, sword1, torch1])
+player = Character("Aragorn", [axe1, torch1, chestplate1, helmet1])
 
 """**********World Creation**********"""
 

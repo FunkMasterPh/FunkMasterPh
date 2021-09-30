@@ -93,7 +93,6 @@ def movePlayer(userMovement, currentRoom):
         print("You can't go there.")
 
 
-
 def attack(target, currentRoom):
     """Checks if target is in room and if true calls the letsFight() function."""
     print(currentRoom)
@@ -148,6 +147,33 @@ def examine(toLookAt, currentRoom):
                 elif object.getObjectType() == "item":
                     print(object.getDesc())       
             
+
+def equip(item):
+    """Check if you have armor in your inventory to equip and if you are wearing
+       any armor, then sets armor status to equipped accordingly."""
+    if not player.isEquipped(item):
+        for armor in player.getInventory():
+            if armor.getItemType() == Armor:
+                if armor.getType().lower() == item.lower():
+                    player.setEquipArmor(item)
+                    return True            
+        else:
+            print("You can't equip that.")
+    else:
+        print("You've already equipped that.")
+
+def unEquip(item):
+    if player.isEquipped(item):
+        for armor in player.getInventory():
+            if armor.getItemType() == Armor:
+                if armor.getType().lower() == item.lower():
+                    player.setUneqiupArmor(item)
+                    return True
+        else:
+            print("You can´t unequip that.")
+    else:
+        print("You don't have that equipped.")  
+
     
 def wieldWeapon(item):
     """Checks if you have weapon in inventory, if it is a weapon and if all 
@@ -189,15 +215,17 @@ def takeItem(item_to_take, currentRoom):
                 return True
             
 
+
 def dropItem(item_to_drop, currentRoom):
     """If item's in inventory, remove from inventory and add it to room inventory."""
     for item in player.getInventory():
         if item.getType().lower() == item_to_drop.lower():
             if item == player.getWielded():
                 unwieldWeapon(item_to_drop)
-            player.getInventory().remove(item)
+            elif player.isEquipped(item_to_drop):
+                unEquip(item_to_drop)
             currentRoom.getObjects().append(item)
-            print(player.getInventory())
+            player.getInventory().remove(item)
             return True
 
 
@@ -246,4 +274,5 @@ def extinguish(item):
                 object.setOnOff(False)
                 player.setIlluminated(False)
                 return True
+
             

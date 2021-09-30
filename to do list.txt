@@ -1,15 +1,11 @@
 fixa resten av kommandona:
 
-_EQUIP_ITEM = "equip"
-_UNEQUIP_ITEM = "unequip"
 _CONSUME_ITEM = "consume"
 _QUIT = "quit"
 
-fixa try except
+fixa class för nyckel och dörr
 
 spara karaktär i textfil
-
-fixa index out of range i kommandon
 
 kommentera upp koden (typ gjort)
 
