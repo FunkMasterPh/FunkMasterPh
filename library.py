@@ -50,11 +50,8 @@ def parsePlayerCommand(playerCommand, currentRoom):
             cmd.examine(command[1], currentRoom)
 
         elif command[0] == cmd._STATUS:
-            hp = player.getHP()
-            dex = player.getDex()
-            stren = player.getStr()
-            print(f"You have {hp} health and {dex} dexterity and {stren} strength")
-
+            cmd.playerStatus()
+            
         elif command[0] == cmd._WIELD_ITEM:
             if cmd.wieldWeapon(command[1]):
                 print(f"You wielded {command[1]}.")
@@ -98,6 +95,7 @@ def parsePlayerCommand(playerCommand, currentRoom):
         elif command[0] == cmd._EQUIP_ITEM:
             if cmd.equip(command[1]):
                 print(f"You equipped {command[1]}.")
+
         elif command[0] == cmd._UNEQUIP_ITEM:
             if cmd.unEquip(command[1]):
                 print(f"You unequipped {command[1]}")

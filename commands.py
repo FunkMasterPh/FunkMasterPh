@@ -66,6 +66,14 @@ def displayHelpMenu():
     print("- QUIT: Leave the game, for some reason.")
     print(56 * "*")
 
+def playerStatus():
+
+    print(18 * "*", "THIS IS YOU", 18 * "*" )
+    print(f"*\tPlayer Level: {player.getLevel()} \t XP: {player.getXP()}/{player.getLevel() * 200}")
+    print(f"*\tPlayer Health: {player.getHP()} \t Armor: {player.getArmor()}")
+    print(f"*\tStrength: {player.getStr()} \t\t Dexterity: {player.getDex()}")
+    print(49 * "*")
+
     
 def movePlayer(userMovement, currentRoom):
     """Checks if exit exists and moves the player if true."""
@@ -156,6 +164,7 @@ def equip(item):
             if armor.getItemType() == Armor:
                 if armor.getType().lower() == item.lower():
                     player.setEquipArmor(item)
+                    player.setArmor(armor.getDamageMitigation())
                     return True            
         else:
             print("You can't equip that.")
@@ -168,6 +177,7 @@ def unEquip(item):
             if armor.getItemType() == Armor:
                 if armor.getType().lower() == item.lower():
                     player.setUneqiupArmor(item)
+                    player.setArmor(-armor.getDamageMitigation())
                     return True
         else:
             print("You can´t unequip that.")

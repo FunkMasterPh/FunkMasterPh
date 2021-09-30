@@ -1,6 +1,7 @@
 from monster_class import Monster
 from goblin_class import *
 from character_class import Character
+from world_creator import *
 import random
 import time
 
@@ -10,8 +11,6 @@ def chanceToHit(attacker, defender):
     if random.randint(1, attacker.getDex()) >= random.randint(1, defender.getDex()):
         return True
 
- 
-
 def letsFight(player, monster):
     """starts a combat loop where if monster is defeated it sets monster alive status to false and it gives player experience"""
     while True:
@@ -20,7 +19,8 @@ def letsFight(player, monster):
             if monster.getHP() <= 0:
                 print("You killed your foe.")
                 monster.setIsAlive(False)
-                player.setXP(100)
+                player.setXP(monster.giveXP())
+                print(player.getXP())
                 if player.levelUp():
                     print("You leveled up!")
                 break

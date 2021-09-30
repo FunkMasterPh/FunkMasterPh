@@ -7,12 +7,13 @@ class Goblin(Monster):
     def __init__(self, inventory: list):
         super().__init__(self)
         self._hp = 10
-        self._str = 1
+        self._str = 3
         self._dex = 1
         self._type = "Goblin"
         self._desc = "A goblin! It's small, ugly and hungry. Better watch out!"
         self._corpseDesc = "The body of a dead goblin."
         self._inventory = inventory
+        self._giveXP = 50
     
 class Troll(Monster):
     def __init__(self, inventory: list):
@@ -23,6 +24,7 @@ class Troll(Monster):
         self._type = "Troll"
         self._desc = "Disfigured and smells funky"
         self._inventory = inventory
+        self._giveXP = 100
     
 class Orc(Monster):
     def __init__(self, inventory: list):

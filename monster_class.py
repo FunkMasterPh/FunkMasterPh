@@ -12,6 +12,10 @@ class Monster:
         self._corpse = "decomposing body"
         self._corpseDesc = None
         self._objectType = "monster"
+        self._giveXP = None
+    
+    def giveXP(self):
+        return self._giveXP
     
     #returns monster health
     def getHP(self):

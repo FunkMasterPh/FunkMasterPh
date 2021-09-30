@@ -32,6 +32,7 @@ goblin2 = Goblin([sword2])
 goblin3 = Goblin([])
 goblin4 = Goblin([sword4])
 troll1 = Troll([])
+troll2 = Troll([])
 
 player = Character("Aragorn", [axe1, torch1, chestplate1, helmet1])
 
@@ -39,7 +40,7 @@ player = Character("Aragorn", [axe1, torch1, chestplate1, helmet1])
 
 cave_1 = Room("It's the first cave.", [goblin1, troll1])
 cave_2 = Room("It's the second cave.", [goblin2, sword3])
-cave_3 = Room("It's the third cave.", [goblin3, axe2])
+cave_3 = Room("It's the third cave.", [goblin3, axe2, troll2])
 cave_4 = Room("It's the fourth cave.", [goblin4])
 
 cave_1.setExitWest(cave_2)

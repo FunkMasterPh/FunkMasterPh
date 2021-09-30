@@ -9,8 +9,6 @@ spara karaktär i textfil
 
 kommentera upp koden (typ gjort)
 
-utveckla xp system
-
 fixa början , boss och slut
 
 merchant

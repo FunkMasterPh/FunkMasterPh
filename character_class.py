@@ -5,7 +5,8 @@ class Character:
     """Initializes a template for character creation."""
     def __init__(self, name, item : list):
         self._name = name
-        self._armor = None
+        self._armor = 0
+        self._level = 1
         self._hp = 100
         self._str = 2
         self._dex = 2
@@ -21,7 +22,7 @@ class Character:
     """returns illuminated status"""
     def getIlluminated(self):
         return self._illuminated
-        
+
     #method for getting character name
     def getName(self):
         return self._name
@@ -57,6 +58,12 @@ class Character:
     #method for getting character wielded status
     def getWielded(self):
         return self._wielded
+
+    def getLevel(self):
+        return self._level
+
+    def getArmor(self):
+        return self._armor
     
     def isEquipped(self, arg):
         if arg == "helmet":
@@ -105,21 +112,30 @@ class Character:
         self._wielded = False
         self._damageModifier -= weapon.getDamage()
 
+    def setArmor(self, arg):
+        self._armor += arg
+
     #method for character to take damage
     def takeDamage(self, dmg):
-        self._hp = self._hp - dmg
-        return dmg
-    
+        taken_dmg = dmg - self._armor
+        if taken_dmg > 1: 
+            self._hp = self._hp - taken_dmg
+            return taken_dmg
+        else:
+            self._hp = self._hp - 1
+            return 1
+
     #method for character to do damage
     def doDamage(self):
         return (random.randint(1, (self._str + self._damageModifier )))
     
     #method for character to level up       
     def levelUp(self):
-        if self._xp >= 200:
+        if self._xp >= self._level * 200:
             self._hp += 10
             self._str += 1
             self._dex += 1
+            self._level += 1
             return True
         else:
             return False

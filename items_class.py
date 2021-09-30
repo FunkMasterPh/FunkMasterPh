@@ -45,7 +45,6 @@ class Weapon(Item):
 class Armor(Item):
     def __init__(self, type, armorLocation, damageMitigation):
         super().__init__()
-        self._armor = None
         self._itemType = Armor
         self._type = type
         self._armorLocation = armorLocation
