@@ -90,5 +90,4 @@ def printVisibleExits(currentRoom):
         roomExits.append("North")
     if currentRoom.getExitSouth():
         roomExits.append("South")
-    print(str(roomExits).replace('[', '').replace(']', ''))
-
+    print(str(roomExits).replace('[', '').replace(']', '')
