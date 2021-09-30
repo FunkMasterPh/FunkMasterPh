@@ -99,7 +99,15 @@ def parsePlayerCommand(playerCommand, currentRoom):
         elif command[0] == cmd._UNEQUIP_ITEM:
             if cmd.unEquip(command[1]):
                 print(f"You unequipped {command[1]}")
-
+        
+        elif command[0] == cmd._BUY:
+            if cmd.trade(command[0], command[1]):
+                print(f"Purchased {command[1]}")
+            
+        elif command[0] == cmd._SELL:
+            if cmd.trade(command[0], command[1]):
+                print(f"Sold {command[1]}")
+            
         return currentRoom
         
                 

@@ -18,10 +18,14 @@ class Character:
         self._illuminated = False
         self._head = False
         self._chest = False
-        
+        self._coin = 100
+
     """returns illuminated status"""
     def getIlluminated(self):
         return self._illuminated
+
+    def getCoin(self):
+        return self._coin
 
     #method for getting character name
     def getName(self):
@@ -140,6 +144,12 @@ class Character:
         else:
             return False
         
+    def buy(self, item):
+        self._inventory.append(item)
+
+
+    def sell(self, item):
+        self._inventory.remove(item)
 
     #def pickUp(self, item):
         #self._inventory.append(item)

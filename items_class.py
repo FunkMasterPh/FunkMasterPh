@@ -45,12 +45,12 @@ class Weapon(Item):
 class Armor(Item):
     def __init__(self, type, armorLocation, damageMitigation):
         super().__init__()
+        self._value = 10
         self._itemType = Armor
         self._type = type
         self._armorLocation = armorLocation
         self._damageMitigation = damageMitigation
 
-    
     def getArmorLocation(self):
         """Returns armor location."""
         return self._armorLocation
