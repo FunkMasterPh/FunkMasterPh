@@ -19,9 +19,16 @@ class Character:
         self._head = False
         self._chest = False
         self._coin = 100
+        self._totalWeight = 0
 
-    """returns illuminated status"""
+    def getTotalWeight(self):
+        return self._totalWeight
+
+    def setTotalWeight(self, arg):
+        self._totalWeight += arg
+ 
     def getIlluminated(self):
+        """returns illuminated status"""
         return self._illuminated
 
     def getCoin(self):

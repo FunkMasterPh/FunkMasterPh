@@ -7,8 +7,6 @@ fixa class för nyckel och dörr
 
 spara karaktär i textfil
 
-fixa weight
-
 kommentera upp koden (typ gjort)
 
 planera upp spelet, fixa början , boss och slut

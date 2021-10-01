@@ -23,11 +23,13 @@ def canPlayerSee(currentRoom):
     else:
         return True
 
-def openDoor():
-    if not door1.getIsOpen():
-        door1.setIsOpen(True)
+def checkWeight(item):
+    if (player.getTotalWeight() + item.getWeight()) <= (player.getStr() * 10):
         return True
-
+    else:
+        print("It's too heavy!")
+        return False
+        
 
 #function for taking and handling user input
 def parsePlayerCommand(playerCommand, currentRoom):

@@ -267,10 +267,11 @@ def takeItem(item_to_take, currentRoom):
     """If item in room inventory, remove from room and add to player inventory."""
     for item in currentRoom.getObjects():
         if item.getObjectType() == "item":
-            if item.getType().lower() == item_to_take.lower():
+            if item.getType().lower() == item_to_take.lower() and library.checkWeight(item):
                 currentRoom.getObjects().remove(item)
                 player.getInventory().append(item)
                 print(player.getInventory())
+                player.setTotalWeight(item.getWeight())
                 return True
             
 

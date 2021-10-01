@@ -14,12 +14,9 @@ import commands
 
 
 """**********Creating All Items**********"""
-
-key1 = misc.Key(1, "A small key.")
-lock1 = misc.Lock(1)
 axe1 = weapons.Axe()
 sword1 = weapons.Sword()
-sword2 = weapons.Sword()t
+sword2 = weapons.Sword()
 sword3 = weapons.Sword()
 sword4 = weapons.Sword()
 sword5 = weapons.Sword()
@@ -27,30 +24,28 @@ torch1 = misc.Torch()
 torch2 = misc.Torch()
 axe2 = weapons.Axe()
 helmet1 = Armor('helmet', 'head', 2)
-helmet2 = Armor('helmet', 'head', 2)
 chestplate1 = Armor('chestplate', 'chest', 3)
-chestplate2 = Armor('chestplate', 'chest', 3)
 
-testsword = weapons.Sword()
-testaxe = weapons.Axe()
-testhelmet = Armor('helmet', 'head', 2)
-
-"""**********Creating Entities**********"""
+"""**********Creating Objects**********"""
 goblin1 = Goblin([sword5])
 goblin2 = Goblin([sword2])
 goblin3 = Goblin([])
 goblin4 = Goblin([])
 troll1 = Troll([])
-troll2 = Troll([key1])
+troll2 = Troll([])
 
-player = Character("Aragorn", [testsword, torch1])
-merchant = Merchant([testaxe, testhelmet])
+player = Character("Aragorn", [torch1])
+merchant = Merchant([])
+
+lock1 = misc.Lock(1)
+chest1 = misc.Chest([chestplate1, sword1], lock1)
+key1 = misc.Key(1, "A small key.")
 
 """**********World Creation**********"""
 
 cave_1 = Room("It's the first cave.", [goblin1, troll1, key1])
-cave_2 = Room("It's the second cave.", [goblin2, sword3])
-cave_3 = Room("It's the third cave.", [goblin3, axe2])
+cave_2 = Room("It's the second cave.", [goblin2, chest1, sword1, sword2, sword3, sword4])
+cave_3 = Room("It's the third cave.", [goblin3])
 cave_4 = Room("It's the fourth cave.", [goblin4, troll2])
 cave_5 = Room("Its the merchant and his shop!", [merchant])
 

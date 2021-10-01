@@ -1,4 +1,6 @@
+from __future__ import annotations
 from items_class import Item
+
 
 class Torch(Item):
     def __init__(self):
@@ -47,24 +49,25 @@ class Lock(Item):
 class Chest(Item):
     def __init__(self, inventory: list, lock: Lock):
         super().__init__()
-        self._desc = "A reasure chest!"
         self._inventory = inventory
         self._lock = lock
         self._isOpen = False
+        self._desc = "A treasure chest."
+        self._type = "chest"
+        self._weight = 1000
         
-    def getDesc(self):
-        return self._desc
 
     def getIsOpen(self):
         return self._isOpen
     
     def getIsOpenPrint(self):
         if self._isOpen:
-            return "an open"
+            self._desc += "\nIt's open!"
         elif not self._isOpen:
-            return "a closed"
+            self._desc += "\nIt's closed."
 
     def getDesc(self):
+        self.getIsOpenPrint()
         return self._desc
 
     def setIsOpen(self, arg):

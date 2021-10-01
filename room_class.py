@@ -1,5 +1,4 @@
 from __future__ import annotations
-from misc import Door
 from monster_class import Monster
 from goblin_class import *
 
