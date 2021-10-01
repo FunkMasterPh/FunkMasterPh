@@ -2,7 +2,7 @@ import fight
 import library
 from world_creator import *
 from character_class import Character
-
+from merchant_class import Merchant
 
 """ Contains commands available through the input loop. """
 
@@ -21,8 +21,11 @@ _EXAMINE = "examine"
 _LIGHT = "light"
 _EXTINGUISH = "extinguish"
 _GO = "go"
+_BUY = "buy"
+_SELL = "sell"
 _ATTACK = "attack"
 _QUIT = "quit"
+
 
 _PLAYER_COMMANDS = [
     _HELP,
@@ -40,6 +43,8 @@ _PLAYER_COMMANDS = [
     _LIGHT, 
     _EXTINGUISH, 
     _GO,
+    _BUY,
+    _SELL,
     _ATTACK, 
     _QUIT
 ]   
@@ -63,6 +68,8 @@ def displayHelpMenu():
     print("- LIGHT <ITEM>: Light a fire.")
     print("- EXTINGUISH <ITEM>: Put a fire out.")
     print("- GO <DIRECTION>: Go somewhere and do something.")
+    print("- BUY <ITEM>: Buys an item from the shop.")
+    print("- SELL <ITEM>: Sells an item to the shop.")
     print("- QUIT: Leave the game, for some reason.")
     print(56 * "*")
 
@@ -147,6 +154,10 @@ def examine(toLookAt, currentRoom):
                     examineMonster(object)
                 elif object.getObjectType() == "item":
                     print(object.getDesc())
+                elif object.getObjectType() == "merchant":
+                    print("He has these items for sale: ")
+                    for item in object.getInventory():
+                        print(item.getType())
 
         for object in player.getInventory():
             if object.getType().lower() == toLookAt.lower():
@@ -154,6 +165,7 @@ def examine(toLookAt, currentRoom):
                     examineMonster(object)
                 elif object.getObjectType() == "item":
                     print(object.getDesc())       
+        
             
 
 def equip(item):
@@ -212,6 +224,44 @@ def unwieldWeapon(item):
                 return True
             else: 
                 return False
+
+
+def trade(arg, object):
+    """Trading items with the merchant!"""
+    if arg.lower() == "buy":
+        for item in merchant.getInventory():
+            if item.getType().lower() == object.lower():
+                if player.getCoin() > item.getValue():
+                    merchant.sell(item)
+                    player.buy(item)
+                    return True
+                else:
+                    print("Fattiglapp, här sossas de inte!")
+                    return False
+            
+        else:
+            print("I dont have that")
+
+      
+            
+
+            
+    elif arg.lower() == "sell":
+        for item in player.getInventory():
+            if item.getType().lower() == object.lower():
+                if merchant.getCoin() > item.getValue():
+                    player.sell(item)
+                    merchant.buy(item)
+                    return True
+                else:
+                    print("I can't afford that item from you, sorry!")
+                    return False
+        else:
+            print("You can't sell stuff you dont have!")
+            return False
+    else:
+        print("Can't do that, sorry!")
+
 
 
 def takeItem(item_to_take, currentRoom):
