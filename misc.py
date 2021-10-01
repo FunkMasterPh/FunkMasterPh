@@ -42,16 +42,19 @@ class Lock(Item):
 
     def getDesc(self):
         return self._desc
-
-class Door(Item):
-    def __init__(self, lock: Lock, direction):
+            
+  
+class Chest(Item):
+    def __init__(self, inventory: list, lock: Lock):
         super().__init__()
-        self._type = "door"
-        self._isOpen = False
-        self._desc = "A robust wooden door."
+        self._desc = "A reasure chest!"
+        self._inventory = inventory
         self._lock = lock
-        self._direction = direction
+        self._isOpen = False
         
+    def getDesc(self):
+        return self._desc
+
     def getIsOpen(self):
         return self._isOpen
     
@@ -63,20 +66,6 @@ class Door(Item):
 
     def getDesc(self):
         return self._desc
-    
-    def getDirection(self):
-        return self._direction
-    
+
     def setIsOpen(self, arg):
         self._isOpen = arg
-
-    
-  
-class Chest(Item):
-    def __init__(self, inventory: list):
-        super().__init__()
-        self._desc = "Treasure chest!"
-        self._inventory = inventory
-        
-    def getDesc(self):
-        return self._desc

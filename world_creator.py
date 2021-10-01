@@ -17,10 +17,9 @@ import commands
 
 key1 = misc.Key(1, "A small key.")
 lock1 = misc.Lock(1)
-door1 = misc.Door(lock1, "NorthSouth")
 axe1 = weapons.Axe()
 sword1 = weapons.Sword()
-sword2 = weapons.Sword()
+sword2 = weapons.Sword()t
 sword3 = weapons.Sword()
 sword4 = weapons.Sword()
 sword5 = weapons.Sword()
@@ -49,7 +48,7 @@ merchant = Merchant([testaxe, testhelmet])
 
 """**********World Creation**********"""
 
-cave_1 = Room("It's the first cave.", [goblin1, troll1, key1], door1)
+cave_1 = Room("It's the first cave.", [goblin1, troll1, key1])
 cave_2 = Room("It's the second cave.", [goblin2, sword3])
 cave_3 = Room("It's the third cave.", [goblin3, axe2])
 cave_4 = Room("It's the fourth cave.", [goblin4, troll2])

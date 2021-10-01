@@ -6,7 +6,7 @@ from goblin_class import *
 #template for creating a room object
 class Room:
 
-    def __init__(self, roomDesc, objects: list, door=None):
+    def __init__(self, roomDesc, objects: list):
 
         self._roomDesc = roomDesc
         self._objects = objects
@@ -15,7 +15,6 @@ class Room:
         self._northExit = None
         self._southExit = None
         self._dark = False
-        self._door = door
     
     #returns dark status on room
     def getDark(self):
@@ -23,8 +22,6 @@ class Room:
     
     #returns a description of the room
     def getRoomDesc(self):
-        if self._door:
-            self._roomDesc += f"\nThere's {self._door.getIsOpenPrint()} door here."
         return self._roomDesc
 
     #if there are objects in the room it returns them
@@ -34,31 +31,19 @@ class Room:
     
     #returns west exit of a room
     def getExitWest(self):
-        if self._door and not self._door.getIsOpen() and self._door.getDirection() == "EastWest":   
-            return
-        else:
-            return self._westExit
+        return self._westExit
 
     #returns north exit of a room
     def getExitNorth(self):
-        if self._door and not self._door.getIsOpen() and self._door.getDirection() == "NorthSouth":
-            return
-        else:
-            return self._northExit
+       return self._northExit
     
     #returns south exit of a room
-    def getExitSouth(self):
-        if self._door and not self._door.getIsOpen() and self._door.getDirection() == "NorthSouth":
-            return 
-        else:   
-            return self._southExit
+    def getExitSouth(self):  
+        return self._southExit
 
     #returns east exit of a room
     def getExitEast(self):
-        if self._door and not self._door.getIsOpen() and self._door.getDirection() == "EastWest":
-            return
-        else:
-            return self._eastExit
+        return self._eastExit
     
     #sets room to dark
     def setDark(self, lightStatus):
