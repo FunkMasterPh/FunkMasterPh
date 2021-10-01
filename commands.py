@@ -79,6 +79,7 @@ def playerStatus():
     print(f"*\tPlayer Level: {player.getLevel()} \t XP: {player.getXP()}/{player.getLevel() * 200}")
     print(f"*\tPlayer Health: {player.getHP()} \t Armor: {player.getArmor()}")
     print(f"*\tStrength: {player.getStr()} \t\t Dexterity: {player.getDex()}")
+    print(f"*\tCoins: {player.getCoin()}")
     print(49 * "*")
 
     
@@ -110,10 +111,9 @@ def movePlayer(userMovement, currentRoom):
 
 def attack(target, currentRoom):
     """Checks if target is in room and if true calls the letsFight() function."""
-    print(currentRoom)
     if library.canPlayerSee(currentRoom):
         for object in currentRoom.getObjects():
-            if object.getType().lower() == target.lower():
+            if object.getType().lower() == target.lower() and object.getObjectType() == "monster":
                 fight.letsFight(player, object)
                 return True
        
@@ -157,7 +157,7 @@ def examine(toLookAt, currentRoom):
                 elif object.getObjectType() == "merchant":
                     print("He has these items for sale: ")
                     for item in object.getInventory():
-                        print(item.getType())
+                        print(f"{item.getType().title()} for {item.getValue()} coins.")
 
         for object in player.getInventory():
             if object.getType().lower() == toLookAt.lower():
@@ -165,7 +165,7 @@ def examine(toLookAt, currentRoom):
                     examineMonster(object)
                 elif object.getObjectType() == "item":
                     print(object.getDesc())       
-        
+    
             
 
 def equip(item):
@@ -234,16 +234,14 @@ def trade(arg, object):
                 if player.getCoin() > item.getValue():
                     merchant.sell(item)
                     player.buy(item)
+                    print(f"You purchased {item.getType()} for {item.getValue()} coins.")
                     return True
                 else:
-                    print("Fattiglapp, här sossas de inte!")
+                    print("The Merchant says: 'You can´t afford that.'")
                     return False
             
         else:
-            print("I dont have that")
-
-      
-            
+            print("The Merchant says: 'I dont have that.'")
 
             
     elif arg.lower() == "sell":
@@ -252,15 +250,16 @@ def trade(arg, object):
                 if merchant.getCoin() > item.getValue():
                     player.sell(item)
                     merchant.buy(item)
+                    print(f"You sold {item.getType()} for {item.getValue()} coins.")
                     return True
                 else:
-                    print("I can't afford that item from you, sorry!")
+                    print("The Merchant says: 'I can't afford to buy that item from you, sorry!'")
                     return False
         else:
-            print("You can't sell stuff you dont have!")
+            print("The Merchant says: 'You can't sell stuff you dont have!'")
             return False
     else:
-        print("Can't do that, sorry!")
+        print("The Merchant says: 'Can't do that, sorry!'")
 
 
 

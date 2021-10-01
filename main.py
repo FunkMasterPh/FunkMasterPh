@@ -13,5 +13,6 @@ from world_creator import *
 currentRoom = cave_1
 
 while True:
+    door1.setIsOpen(True)
     currentRoom = library.parsePlayerCommand(input("What do you want to do? > "), currentRoom)
-  
+ 

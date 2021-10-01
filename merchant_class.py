@@ -4,7 +4,7 @@ class Merchant:
         self._name = "Tom Nook"
         self._objectType = "merchant"
         self._type = "shop"
-        self._coin = 0
+        self._coin = 500
     
     def getType(self):
         return self._type

@@ -1,3 +1,5 @@
+from abc import abstractmethod
+
 class Item:
     def __init__(self):
         self._weight = None
@@ -6,7 +8,7 @@ class Item:
         self._itemType = None
         self._objectType = "item"
         self._desc = None
-    
+
     #method for getting type desciption
     def getType(self):
         return self._type
@@ -21,14 +23,16 @@ class Item:
 
     #method for getting what type of item 
     def getItemType(self):
-        return self._itemType
-
+        pass
+    
     #method for getting what type of object  
     def getObjectType(self):
         return self._objectType
-
+    
+    @abstractmethod
     def getDesc(self):
-        return self._desc
+        pass
+        
 
 
 class Weapon(Item):
@@ -60,17 +64,6 @@ class Armor(Item):
         """Returns damage mitigation."""
         return self._damageMitigation
         
-
-class Misc(Item):
-    def __init__(self):
-        super().__init__()
-        self._desc = None
-        self._itemType = Misc
-
-    #returns description of item  
-    def getDesc(self):
-        return self._desc
-
 
 class Potion(Item):
     def __init__(self, potency, effect):

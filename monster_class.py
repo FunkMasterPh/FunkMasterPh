@@ -1,3 +1,5 @@
+from abc import abstractmethod
+
 class Monster:
     """A template for creating a monster object."""
    

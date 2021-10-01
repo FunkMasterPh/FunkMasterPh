@@ -23,6 +23,12 @@ def canPlayerSee(currentRoom):
     else:
         return True
 
+def openDoor():
+    if not door1.getIsOpen():
+        door1.setIsOpen(True)
+        return True
+
+
 #function for taking and handling user input
 def parsePlayerCommand(playerCommand, currentRoom):
     try: 
@@ -35,7 +41,7 @@ def parsePlayerCommand(playerCommand, currentRoom):
             cmd.displayHelpMenu()
         elif command[0] == cmd._ATTACK:
             if not cmd.attack(command[1], currentRoom):
-                print("No such target.")
+                print("Invalid target.")
         elif command[0] == cmd._GO:                                    
             newCurrentRoom = cmd.movePlayer(command[1], currentRoom)
             if newCurrentRoom != None:
@@ -45,9 +51,12 @@ def parsePlayerCommand(playerCommand, currentRoom):
                 return currentRoom
 
         elif command[0] == cmd._EXAMINE:
-            print("Looking...")
-            time.sleep(1)
-            cmd.examine(command[1], currentRoom)
+            if canPlayerSee(currentRoom):
+                print("Looking...")
+                time.sleep(1)
+                cmd.examine(command[1], currentRoom)
+            else:
+                print("It´s too dark to see.")
 
         elif command[0] == cmd._STATUS:
             cmd.playerStatus()
@@ -101,12 +110,11 @@ def parsePlayerCommand(playerCommand, currentRoom):
                 print(f"You unequipped {command[1]}")
         
         elif command[0] == cmd._BUY:
-            if cmd.trade(command[0], command[1]):
-                print(f"Purchased {command[1]}")
+            cmd.trade(command[0], command[1])
             
         elif command[0] == cmd._SELL:
-            if cmd.trade(command[0], command[1]):
-                print(f"Sold {command[1]}")
+            cmd.trade(command[0], command[1])
+                
             
         return currentRoom
         

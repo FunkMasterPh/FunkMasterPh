@@ -7,16 +7,13 @@ fixa class för nyckel och dörr
 
 spara karaktär i textfil
 
+fixa weight
+
 kommentera upp koden (typ gjort)
 
-fixa början , boss och slut
-
-merchant
+planera upp spelet, fixa början , boss och slut
 
 städa upp
-
-planera upp spelet
-
 
 in case of time:
 randomize 
