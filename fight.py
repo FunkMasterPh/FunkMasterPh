@@ -20,7 +20,6 @@ def letsFight(player, monster):
                 print("You killed your foe.")
                 monster.setIsAlive(False)
                 player.setXP(monster.giveXP())
-                print(player.getXP())
                 if player.levelUp():
                     print("You leveled up!")
                 break
@@ -36,4 +35,4 @@ def letsFight(player, monster):
         print(f"##### You: {player.getHP()} HP ************ ",
         f"{monster.getType()}: {monster.getHP()} HP #####\n")
         time.sleep(2)
-                
+               
