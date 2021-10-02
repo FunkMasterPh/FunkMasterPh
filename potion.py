@@ -29,7 +29,25 @@ class Flask():
         return self._potion
 
     def getType(self):
-        return f"A {self._potion} potion of {self._potency} potency."    
+        if self._potency == PotionSize.SMALL:
+            flask_size = "small"
+        elif self._potency == PotionSize.MEDIUM:
+            flask_size = "medium"
+        elif self._potency == PotionSize.BIG:
+            flask_size = "big"
+
+        if self._potion == PotionType.HP:
+            potion_type = "health"
+        elif self._potion == PotionType.STR:
+            potion_type = "strength"
+        elif self._potion == PotionType.DEX:
+            potion_type = "dexterity"
+        elif self._potion == PotionType.XP:
+            potion_type = "experience"
+        elif self._potion == PotionType.INVIS:
+            potion_type = "invisibility"
+
+        return f"A {flask_size} potion of {potion_type}."    
     
     def setPlayerEffect(self, player):
 
