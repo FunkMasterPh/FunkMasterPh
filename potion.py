@@ -29,6 +29,8 @@ class Flask():
         return self._potion
 
     def getType(self):
+        """Returns a description of the potion, ranging from a small to big 
+        str/dex/hp/xp/invis potion."""
         if self._potency == PotionSize.SMALL:
             flask_size = "small"
         elif self._potency == PotionSize.MEDIUM:
