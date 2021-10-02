@@ -18,3 +18,5 @@ else:
 potion1.setPlayerEffect(player)
 
 print(player.getStr())
+
+print(potion1.getType())

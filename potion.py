@@ -47,7 +47,7 @@ class Flask():
         elif self._potion == PotionType.INVIS:
             potion_type = "invisibility"
 
-        return f"A {flask_size} potion of {potion_type.title()}."    
+        return f"A {flask_size} sized potion of {potion_type.title()}."    
     
     def setPlayerEffect(self, player):
 
