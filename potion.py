@@ -17,6 +17,11 @@ class Flask():
     def __init__(self, potion: PotionType, potency: PotionSize):
         self._potion = potion
         self._potency = potency
+        self._objectType = "potion"
+        self._weight = 1
+        
+    def getWeight(self):
+        return self._weight
 
     def getPotionType(self):
         return self._potion
@@ -27,8 +32,14 @@ class Flask():
     def getPotionEffect(self):
 
         return self._potion
+    
+    def getObjectType(self):
+        return self._objectType
 
     def getType(self):
+        return "potion"
+
+    def getDesc(self):
         """Returns a description of the potion, ranging from a small to big 
         str/dex/hp/xp/invis potion."""
         if self._potency == PotionSize.SMALL:
@@ -49,11 +60,11 @@ class Flask():
         elif self._potion == PotionType.INVIS:
             potion_type = "invisibility"
 
-        return f"A {flask_size} sized potion of {potion_type.title()}."    
+        return f"A {flask_size} potion of {potion_type}."    
     
     def setPlayerEffect(self, player):
 
-        if self._potency == PotionType.HP:
+        if self._potion == PotionType.HP:
             player.setHP(self._potency * 15)
 
         elif self._potion == PotionType.STR:

@@ -42,13 +42,17 @@ def parsePlayerCommand(playerCommand, currentRoom):
         command = playerCommand.strip().split()
         if command == []:
             return currentRoom
+
         elif command[ACTION] not in cmd._PLAYER_COMMANDS:
             print("Command doesn't exist.")
+
         elif command[ACTION] == cmd._HELP:
             cmd.displayHelpMenu()
+
         elif command[ACTION] == cmd._ATTACK:
             if not cmd.attack(command[TARGET], currentRoom):
                 print("Invalid target.")
+
         elif command[ACTION] == cmd._GO:                                    
             newCurrentRoom = cmd.movePlayer(command[TARGET], currentRoom)
             if newCurrentRoom != None:
@@ -108,6 +112,7 @@ def parsePlayerCommand(playerCommand, currentRoom):
                 print("You put out the torch.")
             else:
                 print("There is nothing to extinguish.")    
+
         elif command[ACTION] == cmd._EQUIP_ITEM:
             if cmd.equip(command[TARGET]):
                 print(f"You equipped {command[TARGET]}.")
@@ -115,6 +120,12 @@ def parsePlayerCommand(playerCommand, currentRoom):
         elif command[ACTION] == cmd._UNEQUIP_ITEM:
             if cmd.unEquip(command[TARGET]):
                 print(f"You unequipped {command[TARGET]}")
+
+        elif command[ACTION] == cmd._CONSUME_ITEM:
+            if cmd.consume(command[TARGET]):
+                print("You feel refreshed.")
+            else:
+                print("Can't consume that!")
         
         elif command[ACTION] == cmd._BUY:
             cmd.trade(command[ACTION], command[TARGET])
@@ -131,9 +142,7 @@ def parsePlayerCommand(playerCommand, currentRoom):
             print("Leaving game.")
             sys.exit()
                 
-            
         return currentRoom
-        
                 
     except IndexError:
         print(f"{command[0].title()} what?")
