@@ -3,6 +3,7 @@ import library
 from world_creator import *
 from character_class import Character
 from merchant_class import Merchant
+from account_handler import *
 
 """ Contains commands available through the input loop. """
 
@@ -25,6 +26,7 @@ _BUY = "buy"
 _SELL = "sell"
 _ATTACK = "attack"
 _QUIT = "quit"
+_SAVE = "save"
 
 
 _PLAYER_COMMANDS = [
@@ -46,7 +48,8 @@ _PLAYER_COMMANDS = [
     _BUY,
     _SELL,
     _ATTACK, 
-    _QUIT
+    _QUIT, 
+    _SAVE
 ]   
 
 def displayHelpMenu():
@@ -70,6 +73,7 @@ def displayHelpMenu():
     print("- GO <DIRECTION>: Go somewhere and do something.")
     print("- BUY <ITEM>: Buys an item from the shop.")
     print("- SELL <ITEM>: Sells an item to the shop.")
+    print("- SAVE: Save your progress.")
     print("- QUIT: Leave the game, for some reason.")
     print(56 * "*")
 
@@ -335,4 +339,3 @@ def extinguish(item):
                 player.setIlluminated(False)
                 return True
 
-            

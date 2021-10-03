@@ -8,9 +8,11 @@ import library
 import random
 import fight
 import commands
+import account_handler
 from world_creator import *
 
 currentRoom = cave_1
+
 
 while True:
     currentRoom = library.parsePlayerCommand(input("What do you want to do? > "), currentRoom)

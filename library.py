@@ -1,8 +1,10 @@
-import time
+import time, sys
 from character_class import Character
 from monster_class import Monster
 import commands as cmd
 from world_creator import *
+from account_handler import *
+
 
 """function for printing information about the room the player is in"""
 def printInterface(currentRoom):
@@ -116,6 +118,14 @@ def parsePlayerCommand(playerCommand, currentRoom):
             
         elif command[0] == cmd._SELL:
             cmd.trade(command[0], command[1])
+
+        elif command[0] == cmd._SAVE:
+            savePlayer(player)
+
+        elif command[0] == cmd._QUIT:
+            savePlayer(player)
+            print("Leaving game.")
+            sys.exit()
                 
             
         return currentRoom

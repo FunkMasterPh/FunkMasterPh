@@ -34,7 +34,7 @@ goblin4 = Goblin([])
 troll1 = Troll([])
 troll2 = Troll([])
 
-player = Character("Aragorn", [torch1])
+#player = Character("Aragorn", [torch1])
 merchant = Merchant([])
 
 lock1 = misc.Lock(1)
