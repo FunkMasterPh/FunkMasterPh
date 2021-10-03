@@ -120,7 +120,8 @@ def parsePlayerCommand(playerCommand, currentRoom):
             cmd.trade(command[0], command[1])
 
         elif command[0] == cmd._SAVE:
-            savePlayer(player)
+            if(savePlayer(player)):
+                print("Saved game.")
 
         elif command[0] == cmd._QUIT:
             savePlayer(player)
