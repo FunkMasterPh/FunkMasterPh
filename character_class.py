@@ -104,11 +104,14 @@ class Character:
 
     #method for changing character health 
     def setHP(self, newHP):
-        self._hp = newHP
+        self._hp += newHP
     
     #method for changing character strenght
     def setStr(self, newStr):
-        self._str = newStr
+        self._str += newStr
+
+    def setDex(self, newDex):
+        self._dex += newDex
     
     #method for changing character wielded status to true
     def setWielded(self, weapon):

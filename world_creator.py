@@ -14,6 +14,7 @@ import commands
 
 
 """**********Creating All Items**********"""
+potion1 = Flask(PotionType.HP, PotionSize.SMALL)
 axe1 = weapons.Axe()
 sword1 = weapons.Sword()
 sword2 = weapons.Sword()
@@ -34,7 +35,7 @@ goblin4 = Goblin([])
 troll1 = Troll([])
 troll2 = Troll([])
 
-player = Character("Aragorn", [torch1])
+#player = Character("Aragorn", [torch1])
 merchant = Merchant([])
 
 lock1 = misc.Lock(1)
@@ -43,7 +44,7 @@ key1 = misc.Key(1, "A small key.")
 
 """**********World Creation**********"""
 
-cave_1 = Room("It's the first cave.", [goblin1, troll1, key1])
+cave_1 = Room("It's the first cave.", [goblin1, troll1, key1, potion1])
 cave_2 = Room("It's the second cave.", [goblin2, chest1, sword1, sword2, sword3, sword4])
 cave_3 = Room("It's the third cave.", [goblin3])
 cave_4 = Room("It's the fourth cave.", [goblin4, troll2])

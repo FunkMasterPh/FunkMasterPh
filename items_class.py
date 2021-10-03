@@ -23,7 +23,7 @@ class Item:
 
     #method for getting what type of item 
     def getItemType(self):
-        pass
+        return self._itemType
     
     #method for getting what type of object  
     def getObjectType(self):

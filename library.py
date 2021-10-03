@@ -1,8 +1,13 @@
-import time
+import time, sys
 from character_class import Character
 from monster_class import Monster
 import commands as cmd
 from world_creator import *
+from account_handler import *
+
+ACTION = 0
+TARGET = 1
+
 
 """function for printing information about the room the player is in"""
 def printInterface(currentRoom):
@@ -37,89 +42,107 @@ def parsePlayerCommand(playerCommand, currentRoom):
         command = playerCommand.strip().split()
         if command == []:
             return currentRoom
-        elif command[0] not in cmd._PLAYER_COMMANDS:
+
+        elif command[ACTION] not in cmd._PLAYER_COMMANDS:
             print("Command doesn't exist.")
-        elif command[0] == cmd._HELP:
+
+        elif command[ACTION] == cmd._HELP:
             cmd.displayHelpMenu()
-        elif command[0] == cmd._ATTACK:
-            if not cmd.attack(command[1], currentRoom):
+
+        elif command[ACTION] == cmd._ATTACK:
+            if not cmd.attack(command[TARGET], currentRoom):
                 print("Invalid target.")
-        elif command[0] == cmd._GO:                                    
-            newCurrentRoom = cmd.movePlayer(command[1], currentRoom)
+
+        elif command[ACTION] == cmd._GO:                                    
+            newCurrentRoom = cmd.movePlayer(command[TARGET], currentRoom)
             if newCurrentRoom != None:
                 printInterface(newCurrentRoom)
                 return newCurrentRoom
             else:
                 return currentRoom
 
-        elif command[0] == cmd._EXAMINE:
+        elif command[ACTION] == cmd._EXAMINE:
             if canPlayerSee(currentRoom):
                 print("Looking...")
                 time.sleep(1)
-                cmd.examine(command[1], currentRoom)
+                cmd.examine(command[TARGET], currentRoom)
             else:
                 print("It´s too dark to see.")
 
-        elif command[0] == cmd._STATUS:
+        elif command[ACTION] == cmd._STATUS:
             cmd.playerStatus()
             
-        elif command[0] == cmd._WIELD_ITEM:
-            if cmd.wieldWeapon(command[1]):
-                print(f"You wielded {command[1]}.")
+        elif command[ACTION] == cmd._WIELD_ITEM:
+            if cmd.wieldWeapon(command[TARGET]):
+                print(f"You wielded {command[TARGET]}.")
 
-        elif command[0] == cmd._UNWIELD_ITEM:
-            if cmd.unwieldWeapon(command[1]):
-                print(f"You unwielded {command[1]}.")
+        elif command[ACTION] == cmd._UNWIELD_ITEM:
+            if cmd.unwieldWeapon(command[TARGET]):
+                print(f"You unwielded {command[TARGET]}.")
             else:
                 print("You're not wielding that item.")
 
-        elif command[0] == cmd._TAKE_ITEM:
-            if cmd.takeItem(command[1], currentRoom):
-                print(f"You take {command[1]}.")
+        elif command[ACTION] == cmd._TAKE_ITEM:
+            if cmd.takeItem(command[TARGET], currentRoom):
+                print(f"You take {command[TARGET]}.")
             else:
                 print("You can't take that.")  
 
-        elif command[0] == cmd._DROP_ITEM:
-            if cmd.dropItem(command[1], currentRoom):
-                print(f"You dropped {command[1]}.")       
+        elif command[ACTION] == cmd._DROP_ITEM:
+            if cmd.dropItem(command[TARGET], currentRoom):
+                print(f"You dropped {command[TARGET]}.")       
             else:
                 print("You don't have that item.")
 
-        elif command[0] == cmd._INVENTORY:
+        elif command[ACTION] == cmd._INVENTORY:
             cmd.checkInventory()
 
-        elif command[0] == cmd._LOOT:
-            if cmd.loot(currentRoom, command[1]):
+        elif command[ACTION] == cmd._LOOT:
+            if cmd.loot(currentRoom, command[TARGET]):
                 print("You loot the body.")
             else:
                 print("Nothing to loot.")
 
-        elif command[0] == cmd._LIGHT:
-            if cmd.light(command[1]):
+        elif command[ACTION] == cmd._LIGHT:
+            if cmd.light(command[TARGET]):
                 print("You light the torch.")
 
-        elif command[0] == cmd._EXTINGUISH:
-            if cmd.extinguish(command[1]):
+        elif command[ACTION] == cmd._EXTINGUISH:
+            if cmd.extinguish(command[TARGET]):
                 print("You put out the torch.")
             else:
                 print("There is nothing to extinguish.")    
-        elif command[0] == cmd._EQUIP_ITEM:
-            if cmd.equip(command[1]):
-                print(f"You equipped {command[1]}.")
 
-        elif command[0] == cmd._UNEQUIP_ITEM:
-            if cmd.unEquip(command[1]):
-                print(f"You unequipped {command[1]}")
+        elif command[ACTION] == cmd._EQUIP_ITEM:
+            if cmd.equip(command[TARGET]):
+                print(f"You equipped {command[TARGET]}.")
+
+        elif command[ACTION] == cmd._UNEQUIP_ITEM:
+            if cmd.unEquip(command[TARGET]):
+                print(f"You unequipped {command[TARGET]}")
+
+        elif command[ACTION] == cmd._CONSUME_ITEM:
+            if cmd.consume(command[TARGET]):
+                print("You feel refreshed.")
+            else:
+                print("Can't consume that!")
         
-        elif command[0] == cmd._BUY:
-            cmd.trade(command[0], command[1])
+        elif command[ACTION] == cmd._BUY:
+            cmd.trade(command[ACTION], command[TARGET])
             
-        elif command[0] == cmd._SELL:
-            cmd.trade(command[0], command[1])
+        elif command[ACTION] == cmd._SELL:
+            cmd.trade(command[ACTION], command[TARGET])
+
+        elif command[ACTION] == cmd._SAVE:
+            if(savePlayer(player)):
+                print("Saved game.")
+
+        elif command[ACTION] == cmd._QUIT:
+            savePlayer(player)
+            print("Leaving game.")
+            sys.exit()
                 
-            
         return currentRoom
-        
                 
     except IndexError:
         print(f"{command[0].title()} what?")

@@ -3,6 +3,7 @@ import library
 from world_creator import *
 from character_class import Character
 from merchant_class import Merchant
+from account_handler import *
 
 """ Contains commands available through the input loop. """
 
@@ -25,6 +26,7 @@ _BUY = "buy"
 _SELL = "sell"
 _ATTACK = "attack"
 _QUIT = "quit"
+_SAVE = "save"
 
 
 _PLAYER_COMMANDS = [
@@ -46,7 +48,8 @@ _PLAYER_COMMANDS = [
     _BUY,
     _SELL,
     _ATTACK, 
-    _QUIT
+    _QUIT, 
+    _SAVE
 ]   
 
 def displayHelpMenu():
@@ -70,6 +73,7 @@ def displayHelpMenu():
     print("- GO <DIRECTION>: Go somewhere and do something.")
     print("- BUY <ITEM>: Buys an item from the shop.")
     print("- SELL <ITEM>: Sells an item to the shop.")
+    print("- SAVE: Save your progress.")
     print("- QUIT: Leave the game, for some reason.")
     print(56 * "*")
 
@@ -117,22 +121,13 @@ def attack(target, currentRoom):
                 fight.letsFight(player, object)
                 return True
        
-def consume(self, item):
+def consume(item_to_consume):
     """Checks what potion you want to drink and alters stats accordingly."""
-    if Potion.getDesc() == [0]:
-        self._hp += item.getHP()
-        self._inventory.remove(item)
-    elif item.getType() == "Strength_Potion":
-        self._str += item.getStr()
-        self._inventory.remove(item)
-    elif item.getType() == "Dexterity_Potion":
-        self._dex += item.getDex()
-        self._inventory.remove(item)
-    elif item.getType() == "XP_Potion":
-        self._xp += item.getXP()
-        self._inventory.remove(item)
-    else:
-        return False
+    for item in player.getInventory():
+        if item.getObjectType() == "potion" and item_to_consume.lower() == "potion":
+            item.setPlayerEffect(player)
+            return True
+    
 
 def examineMonster(monster):
     """Prints the description and inventory of target monster."""
@@ -152,7 +147,8 @@ def examine(toLookAt, currentRoom):
             if object.getType().lower() == toLookAt.lower():
                 if object.getObjectType() == "monster":
                     examineMonster(object)
-                elif object.getObjectType() == "item":
+                elif object.getObjectType() in ("item", "potion"):
+                    print("foo")
                     print(object.getDesc())
                 elif object.getObjectType() == "merchant":
                     print("He has these items for sale: ")
@@ -163,7 +159,8 @@ def examine(toLookAt, currentRoom):
             if object.getType().lower() == toLookAt.lower():
                 if object.getObjectType() == "monster":
                     examineMonster(object)
-                elif object.getObjectType() == "item":
+                elif object.getObjectType() in ("item", "potion"):
+                    print("foo")
                     print(object.getDesc())       
     
             
@@ -265,7 +262,7 @@ def trade(arg, object):
 def takeItem(item_to_take, currentRoom):
     """If item in room inventory, remove from room and add to player inventory."""
     for item in currentRoom.getObjects():
-        if item.getObjectType() == "item":
+        if item.getObjectType() in ("item", "potion"):
             if item.getType().lower() == item_to_take.lower() and library.checkWeight(item):
                 currentRoom.getObjects().remove(item)
                 player.getInventory().append(item)
@@ -332,4 +329,3 @@ def extinguish(item):
                 player.setIlluminated(False)
                 return True
 
-            
