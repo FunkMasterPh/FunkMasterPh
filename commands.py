@@ -262,7 +262,6 @@ def trade(arg, object):
         print("The Merchant says: 'Can't do that, sorry!'")
 
 
-
 def takeItem(item_to_take, currentRoom):
     """If item in room inventory, remove from room and add to player inventory."""
     for item in currentRoom.getObjects():
@@ -275,7 +274,6 @@ def takeItem(item_to_take, currentRoom):
                 return True
             
 
-
 def dropItem(item_to_drop, currentRoom):
     """If item's in inventory, remove from inventory and add it to room inventory."""
     for item in player.getInventory():
@@ -287,7 +285,6 @@ def dropItem(item_to_drop, currentRoom):
             currentRoom.getObjects().append(item)
             player.getInventory().remove(item)
             return True
-
 
 
 def checkInventory():
