@@ -18,18 +18,11 @@ def savePlayer(player):
     with open(f'{playername}/{player._name.lower()}.P', 'wb') as f:
         pickle.dump(player, f)
 
-def saveWorld(cave_1, cave_2, cave_3, cave_4, cave_5):
+def saveWorld(caves):
     
-    with open(f'{playername}/{player._name.lower()}_cave1.P', 'wb') as f:
-        pickle.dump(cave_1, f)
-    with open(f'{playername}/{player._name.lower()}_cave2.P', 'wb') as f:
-        pickle.dump(cave_2, f)
-    with open(f'{playername}/{player._name.lower()}_cave3.P', 'wb') as f:
-        pickle.dump(cave_3, f)
-    with open(f'{playername}/{player._name.lower()}_cave4.P', 'wb') as f:
-        pickle.dump(cave_4, f)
-    with open(f'{playername}/{player._name.lower()}_cave5.P', 'wb') as f:
-        pickle.dump(cave_5, f)
+    with open(f'{playername}/{player._name.lower()}_caves.P', 'wb') as f:
+        pickle.dump(caves, f)
+    
    
 def autoSave():
     while True:

@@ -151,12 +151,12 @@ def parsePlayerCommand(playerCommand, currentRoom):
 
         elif command[ACTION] == cmd._SAVE:
             savePlayer(player)
-            saveWorld(cave_1, cave_2, cave_3, cave_4, cave_5)
+            saveWorld([cave_1, cave_2, cave_3, cave_4, cave_5])
             print("Saved game.")
 
         elif command[ACTION] == cmd._QUIT:
             savePlayer(player)
-            saveWorld(cave_1, cave_2, cave_3, cave_4, cave_5)
+            saveWorld([cave_1, cave_2, cave_3, cave_4, cave_5])
             print("Leaving game.")
             sys.exit()
                 
