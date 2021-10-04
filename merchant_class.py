@@ -30,5 +30,6 @@ class Merchant:
     def sell(self, item):
         self._inventory.remove(item)
 
-        
+    def setCoin(self, amount):
+        self._coin += amount
     

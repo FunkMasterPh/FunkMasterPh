@@ -39,7 +39,8 @@ class Weapon(Item):
     def __init__(self):
         super().__init__()
         self._damage = None
-        self._itemType = Weapon
+        self._itemType = "weapon"
+        self._value = 1
     
     def getDamage(self):
         """Returns weapon damage."""
@@ -50,11 +51,11 @@ class Armor(Item):
     def __init__(self, type, armorLocation, damageMitigation):
         super().__init__()
         self._value = 10
-        self._itemType = Armor
+        self._itemType = "armor"
         self._type = type
         self._armorLocation = armorLocation
         self._damageMitigation = damageMitigation
-
+        self._weight = 10
     def getArmorLocation(self):
         """Returns armor location."""
         return self._armorLocation

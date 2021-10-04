@@ -1,15 +1,12 @@
-fixa resten av kommandona:
+fixa chest och nyckel
 
-_CONSUME_ITEM = "consume"
-_QUIT = "quit"
+skapa mapp för varje spelare
 
-fixa class för nyckel och dörr
-
-kommentera upp koden (typ gjort)
+slå ihop light/extinguish
 
 planera upp spelet, fixa början , boss och slut
 
-städa upp
+städa upp/kommentera upp koden (typ gjort)
 
 in case of time:
 randomize 

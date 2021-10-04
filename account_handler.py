@@ -30,13 +30,12 @@ def saveWorld(cave_1, cave_2, cave_3, cave_4, cave_5):
         pickle.dump(cave_4, f)
     with open(f'{player._name.lower()}_cave5.P', 'wb') as f:
         pickle.dump(cave_5, f)
-
-
    
 def autoSave():
     while True:
         time.sleep(120)
         savePlayer(player)  
+        saveWorld(cave_1, cave_2, cave_3, cave_4, cave_5)
         
 
 if loginPlayer(playername):

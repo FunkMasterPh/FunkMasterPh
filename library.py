@@ -7,7 +7,7 @@ from account_handler import *
 
 ACTION = 0
 TARGET = 1
-
+NUMBER = 2
 
 """function for printing information about the room the player is in"""
 def printInterface(currentRoom):
@@ -73,11 +73,11 @@ def parsePlayerCommand(playerCommand, currentRoom):
             cmd.playerStatus()
             
         elif command[ACTION] == cmd._WIELD_ITEM:
-            if cmd.wieldWeapon(command[TARGET]):
+            if cmd.manageWeapons(command[ACTION], command[TARGET]):
                 print(f"You wielded {command[TARGET]}.")
 
         elif command[ACTION] == cmd._UNWIELD_ITEM:
-            if cmd.unwieldWeapon(command[TARGET]):
+            if cmd.manageWeapons(command[ACTION], command[TARGET]):
                 print(f"You unwielded {command[TARGET]}.")
             else:
                 print("You're not wielding that item.")
@@ -114,24 +114,40 @@ def parsePlayerCommand(playerCommand, currentRoom):
                 print("There is nothing to extinguish.")    
 
         elif command[ACTION] == cmd._EQUIP_ITEM:
-            if cmd.equip(command[TARGET]):
+            if cmd.manageEquipment(command[ACTION], command[TARGET]):
                 print(f"You equipped {command[TARGET]}.")
+            else: 
+                print("You've already equipped that.")
 
         elif command[ACTION] == cmd._UNEQUIP_ITEM:
-            if cmd.unEquip(command[TARGET]):
-                print(f"You unequipped {command[TARGET]}")
+            if cmd.manageEquipment(command[ACTION], command[TARGET]):
+                print(f"You unequipped {command[TARGET]}.")
+            else:
+                print("You don't have that equipped.")
 
         elif command[ACTION] == cmd._CONSUME_ITEM:
-            if cmd.consume(command[TARGET]):
-                print("You feel refreshed.")
-            else:
-                print("Can't consume that!")
+            if len(command) < 3:
+                if cmd.consume(command[TARGET]):
+                    print("You feel refreshed.")
+                else:
+                    print("Can't consume that!")
+            elif len(command) == 3:
+                if cmd.consume(command[TARGET], command[NUMBER]):
+                    print("You feel refreshed.")
+                else:
+                    print("Can't consume that!")
         
         elif command[ACTION] == cmd._BUY:
-            cmd.trade(command[ACTION], command[TARGET])
+            if currentRoom == cave_5:
+                cmd.trade(command[ACTION], command[TARGET])
+            else:
+                print("You are nowhere near the shop!")
             
         elif command[ACTION] == cmd._SELL:
-            cmd.trade(command[ACTION], command[TARGET])
+            if currentRoom == cave_5:
+                cmd.trade(command[ACTION], command[TARGET])
+            else:
+                print("You are nowhere near the shop!")
 
         elif command[ACTION] == cmd._SAVE:
             savePlayer(player)
@@ -140,6 +156,7 @@ def parsePlayerCommand(playerCommand, currentRoom):
 
         elif command[ACTION] == cmd._QUIT:
             savePlayer(player)
+            saveWorld(cave_1, cave_2, cave_3, cave_4, cave_5)
             print("Leaving game.")
             sys.exit()
                 

@@ -18,7 +18,7 @@ class Character:
         self._illuminated = False
         self._head = False
         self._chest = False
-        self._coin = 100
+        self._coin = 20
         self._totalWeight = 0
 
     def getTotalWeight(self):
@@ -91,7 +91,7 @@ class Character:
         elif arg == "chestplate":
             self._chest = True
 
-    def setUneqiupArmor(self, arg):
+    def setUnequipArmor(self, arg):
         """sets status on helmet or chestplate as false if player unequips helmet or chestplate"""
         if arg == "helmet":
             self._head = None
@@ -139,6 +139,9 @@ class Character:
         """changes characters armor value depending on argument"""
         self._armor += arg
 
+    def setCoin(self, amount):
+        self._coin += amount
+
     def takeDamage(self, dmg):
         """takes ammount of damage as argument, removes the armor value from that ammount. Also makes sure character cant take negative damage"""
         taken_dmg = dmg - self._armor
@@ -172,5 +175,3 @@ class Character:
     def sell(self, item):
         """method for selling item"""
         self._inventory.remove(item)
-
-    

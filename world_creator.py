@@ -18,6 +18,7 @@ import pickle
 
 """**********Creating All Items**********"""
 potion1 = Flask(PotionType.HP, PotionSize.SMALL)
+potion2 = Flask(PotionType.DEX, PotionSize.SMALL)
 axe1 = weapons.Axe()
 sword1 = weapons.Sword()
 sword2 = weapons.Sword()
@@ -32,33 +33,33 @@ helmet1 = Armor('helmet', 'head', 2)
 chestplate1 = Armor('chestplate', 'chest', 3)
 
 """**********Creating Objects**********"""
-goblin1 = Goblin([sword5])
-goblin2 = Goblin([sword2])
+goblin1 = Goblin([])
+goblin2 = Goblin([])
 goblin3 = Goblin([])
 goblin4 = Goblin([])
 troll1 = Troll([])
 troll2 = Troll([])
 
-#player = Character("Aragorn", [torch1])
-merchant = Merchant([])
+merchant = Merchant([sword5])
 
 lock1 = misc.Lock(1)
-chest1 = misc.Chest([chestplate1, sword1], lock1)
+chest1 = misc.Chest([sword1], lock1)
 key1 = misc.Key(1, "A small key.")
 
 """**********World Creation**********"""
+
 
 try:
     with open(f'{acc.player._name.lower()}_cave1.P', 'rb') as f:
         cave_1 = pickle.load(f)
 except:
-    cave_1 = Room("It's the first cave.", [goblin1, troll1, key1, potion1])
+    cave_1 = Room("It's the first cave.", [goblin1, troll1, key1, potion1, potion2, axe1, torch1, ])
 try:
     with open(f'{acc.player._name.lower()}_cave2.P', 'rb') as f:
         cave_2 = pickle.load(f)
 
 except:
-    cave_2 = Room("It's the second cave.", [goblin2, chest1, sword1, sword2, sword3, sword4])
+    cave_2 = Room("It's the second cave.", [goblin2, chest1, helmet1, chestplate1, sword1, sword2, sword3, sword4])
 try:
     with open(f'{acc.player._name.lower()}_cave3.P', 'rb') as f:
         cave_3 = pickle.load(f)

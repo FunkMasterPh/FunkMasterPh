@@ -62,7 +62,7 @@ class Flask():
 
         return f"A {flask_size} potion of {potion_type}."    
     
-    def setPlayerEffect(self, player):
+    def setPotionEffect(self, player):
 
         if self._potion == PotionType.HP:
             player.setHP(self._potency * 15)
