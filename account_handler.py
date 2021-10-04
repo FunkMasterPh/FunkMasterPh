@@ -28,7 +28,7 @@ def autoSave():
     while True:
         time.sleep(120)
         savePlayer(player)  
-        saveWorld(cave_1, cave_2, cave_3, cave_4, cave_5)
+        saveWorld([cave_1, cave_2, cave_3, cave_4, cave_5])
         
 
 if loginPlayer(playername):
