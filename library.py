@@ -134,11 +134,11 @@ def parsePlayerCommand(playerCommand, currentRoom):
             cmd.trade(command[ACTION], command[TARGET])
 
         elif command[ACTION] == cmd._SAVE:
-            if(savePlayer(player)):
-                print("Saved game.")
+            savePlayer(player, world)
+            print("Saved game.")
 
         elif command[ACTION] == cmd._QUIT:
-            savePlayer(player)
+            savePlayer(player, world)
             print("Leaving game.")
             sys.exit()
                 

@@ -148,7 +148,6 @@ def examine(toLookAt, currentRoom):
                 if object.getObjectType() == "monster":
                     examineMonster(object)
                 elif object.getObjectType() in ("item", "potion"):
-                    print("foo")
                     print(object.getDesc())
                 elif object.getObjectType() == "merchant":
                     print("He has these items for sale: ")
@@ -160,7 +159,6 @@ def examine(toLookAt, currentRoom):
                 if object.getObjectType() == "monster":
                     examineMonster(object)
                 elif object.getObjectType() in ("item", "potion"):
-                    print("foo")
                     print(object.getDesc())       
     
             
