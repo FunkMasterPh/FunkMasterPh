@@ -5,8 +5,6 @@ _QUIT = "quit"
 
 fixa class för nyckel och dörr
 
-spara karaktär i textfil
-
 kommentera upp koden (typ gjort)
 
 planera upp spelet, fixa början , boss och slut
