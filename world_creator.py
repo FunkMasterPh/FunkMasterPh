@@ -13,7 +13,7 @@ import random
 import fight
 import commands
 
-def create_world(playername):
+def create_world():
     """**********Creating All Items**********"""
     potion1 = Flask(PotionType.HP, PotionSize.SMALL)
     axe1 = weapons.Axe()
