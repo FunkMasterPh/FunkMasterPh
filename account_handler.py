@@ -2,6 +2,7 @@ from world_creator import *
 from world_class import World
 import pickle
 import time, os
+import commands as cmd
 
 playername = input("What is your name? ")
 def loginPlayer(playername):
@@ -18,17 +19,17 @@ def savePlayer(player):
     with open(f'{playername}/{player._name.lower()}.P', 'wb') as f:
         pickle.dump(player, f)
 
-def saveWorld(caves):
+def saveWorld(caves=None):
     
     with open(f'{playername}/{player._name.lower()}_caves.P', 'wb') as f:
         pickle.dump(caves, f)
     
    
-def autoSave():
+def autoSave(caves):
     while True:
-        time.sleep(120)
+        time.sleep(12)
         savePlayer(player)  
-        saveWorld([cave_1, cave_2, cave_3, cave_4, cave_5])
+        saveWorld(caves)
         
 
 if loginPlayer(playername):

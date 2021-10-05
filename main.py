@@ -9,7 +9,7 @@ import account_handler
 from world_creator import *
 
 currentRoom = cave_1
-saver = threading.Thread(target=account_handler.autoSave)
+saver = threading.Thread(target=account_handler.autoSave, args=[caves])
 saver.start()
 
 def main_menu(currentRoom):
