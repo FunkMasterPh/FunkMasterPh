@@ -38,6 +38,8 @@ ARMOR = "armor"
 MERCHANT = "merchant"
 BUY = "buy"
 SELL = "sell"
+LIGHT = "light"
+EXTINGUISH = "extinguish"
 
 
 _PLAYER_COMMANDS = [
@@ -102,24 +104,24 @@ def movePlayer(userMovement, currentRoom):
         if currentRoom.getExitWest():
             return currentRoom.getExitWest()
         else: 
-            print("You run into a wall.")
+            print("I run into a wall.")
     elif userMovement == "east":
         if currentRoom.getExitEast():
             return currentRoom.getExitEast()
         else: 
-            print("You run into a wall.")
+            print("I run into a wall.")
     elif userMovement == "north":
         if currentRoom.getExitNorth():
             return currentRoom.getExitNorth()
         else: 
-            print("You run into a wall.")
+            print("I run into a wall.")
     elif userMovement == "south":
         if currentRoom.getExitSouth():
             return currentRoom.getExitSouth()
         else: 
-            print("You run into a wall.")
+            print("I run into a wall.")
     else:
-        print("You can't go there.")
+        print("I can't go there.")
 
 
 def attack(target, currentRoom):
@@ -188,32 +190,34 @@ def examine(toLookAt, currentRoom):
                     print(item.getDesc())       
 
 def manageGear(command, item):
-    """Checks if you have weapon in inventory, if it is a weapon and if all 
-       true changes wielded status accordingly."""
+    """Checks if you have the equipment in inventory and if it is a piece of equipment. 
+        If all is true changes equipment status accordingly."""
     for thing in player.getInventory():
-        if thing.getType().lower() == item.lower():
-            if thing.getItemType() == WEAPON:
-                if command == EQUIP and not player.getWielded():
-                    player.setWielded(thing)
-                    return True
-                elif command == UNEQUIP and thing == player.getWielded():
-                    player.setUnwield(thing)
-                    return True
-                else:
-                    print(f"I've already done that.")
-                    return False
-            elif thing.getItemType() == ARMOR:
-                if command == EQUIP and not player.isEquipped(item):
-                    player.setEquipArmor(item)
-                    player.setArmor(thing.getDamageMitigation())
-                    return True      
-                elif command == UNEQUIP and player.isEquipped(item):
-                    player.setUnequipArmor(item)
-                    player.setArmor(-thing.getDamageMitigation())
-                    return True
+        if thing.getType().lower() == item.lower() and thing.getItemType() == WEAPON:
+            if command == EQUIP and not player.getWielded():
+                player.setWielded(thing)
+                return True
+            elif command == UNEQUIP and thing == player.getWielded():
+                player.setUnwield(thing)
+                return True
             else:
-                print("I can't use that item like that.") 
-                return False 
+                print(f"I've already done that.")
+                return False
+        elif thing.getType().lower() == item.lower() and thing.getItemType() == ARMOR:
+            if command == EQUIP and not player.isEquipped(item):
+                player.setEquipArmor(item)
+                player.setArmor(thing.getDamageMitigation())
+                return True      
+            elif command == UNEQUIP and player.isEquipped(item):
+                player.setUnequipArmor(item)
+                player.setArmor(-thing.getDamageMitigation())
+                return True
+            else:
+                print("I've already done that.")
+                return False
+        else:
+            print("I can't use that item like that.") 
+            return False 
     else:
         print("I don't have that item.")   
         return False
@@ -308,31 +312,26 @@ def loot(currentRoom, itemToLoot):
             return True
 
 
-def light(item):
+def lightExtinguish(command, item):
     """Checks if you have torch in inventory, lights it if true."""
     for thing in player.getInventory():
         if thing.getType().lower() == item.lower() and item.lower() == TORCH:
-            if thing.getOn() != True:
-                thing.setOnOff(True)
-                player.setIlluminated(True)
+            if command == LIGHT:
+                if thing.getOn() != True:
+                    thing.setOnOff(True)
+                    player.setIlluminated(True)
+                    return True
+                else:
+                    print("The torch is already lit.")
+                    return False
+            elif command == EXTINGUISH and thing.getOn():
+                thing.setOnOff(False)
+                player.setIlluminated(False)
                 return True
-            else:
-                print("The torch is already lit.")
-                return False
-        else:
-            print("You can't light that.")
-            return False
+            
     else:
-        print("I don´t have that.")
-
-def extinguish(item):
-    """Checks if torch is in player inventory and extinguishes if its lit."""
-    for thing in player.getInventory():
-        if thing.getType().lower() == item.lower() and thing.getType() == TORCH and thing.getOn():
-            thing.setOnOff(False)
-            player.setIlluminated(False)
-            return True
-
+        print("I can't light that.")
+            
 #def open():
 #    for item in player.getInventory():
 #        if item.getDesc() == "key":

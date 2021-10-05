@@ -94,11 +94,11 @@ def parsePlayerCommand(playerCommand, currentRoom):
                 print("Nothing to loot.")
 
         elif command[ACTION] == cmd._LIGHT:
-            if cmd.light(command[TARGET]):
+            if cmd.lightExtinguish(command[ACTION], command[TARGET]):
                 print("You light the torch.")
 
         elif command[ACTION] == cmd._EXTINGUISH:
-            if cmd.extinguish(command[TARGET]):
+            if cmd.lightExtinguish(command[ACTION], command[TARGET]):
                 print("You put out the torch.")
             else:
                 print("There is nothing to extinguish.")    
