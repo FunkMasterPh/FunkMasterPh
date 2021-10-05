@@ -70,17 +70,7 @@ def parsePlayerCommand(playerCommand, currentRoom):
                 print("It´s too dark to see.")
 
         elif command[ACTION] == cmd._STATUS:
-            cmd.playerStatus()
-            
-        elif command[ACTION] == cmd._WIELD_ITEM:
-            if cmd.manageWeapons(command[ACTION], command[TARGET]):
-                print(f"You wielded {command[TARGET]}.")
-
-        elif command[ACTION] == cmd._UNWIELD_ITEM:
-            if cmd.manageWeapons(command[ACTION], command[TARGET]):
-                print(f"You unwielded {command[TARGET]}.")
-            else:
-                print("You're not wielding that item.")
+            cmd.playerStatus() 
 
         elif command[ACTION] == cmd._TAKE_ITEM:
             if cmd.takeItem(command[TARGET], currentRoom):
@@ -114,16 +104,12 @@ def parsePlayerCommand(playerCommand, currentRoom):
                 print("There is nothing to extinguish.")    
 
         elif command[ACTION] == cmd._EQUIP_ITEM:
-            if cmd.manageEquipment(command[ACTION], command[TARGET]):
+            if cmd.manageGear(command[ACTION], command[TARGET]):
                 print(f"You equipped {command[TARGET]}.")
-            else: 
-                print("You've already equipped that.")
 
         elif command[ACTION] == cmd._UNEQUIP_ITEM:
-            if cmd.manageEquipment(command[ACTION], command[TARGET]):
+            if cmd.manageGear(command[ACTION], command[TARGET]):
                 print(f"You unequipped {command[TARGET]}.")
-            else:
-                print("You don't have that equipped.")
 
         elif command[ACTION] == cmd._CONSUME_ITEM:
             if len(command) < 3:
@@ -150,17 +136,15 @@ def parsePlayerCommand(playerCommand, currentRoom):
                 print("You are nowhere near the shop!")
 
         elif command[ACTION] == cmd._SAVE:
-            savePlayer(player)
-            saveWorld([cave_1, cave_2, cave_3, cave_4, cave_5])
+            saveGame(player, caves)
             print("Saved game.")
 
         elif command[ACTION] == cmd._QUIT:
-            savePlayer(player)
-            saveWorld([cave_1, cave_2, cave_3, cave_4, cave_5])
+            saveGame(player, caves)
             print("Leaving game.")
             sys.exit()
         elif command[ACTION] == cmd._OPEN:
-            
+            pass
                 
         return currentRoom
                 

@@ -8,8 +8,6 @@ from account_handler import *
 """ Contains commands available through the input loop. """
 
 _HELP = "help"
-_WIELD_ITEM = "wield"
-_UNWIELD_ITEM = "unwield"
 _TAKE_ITEM = "take"
 _DROP_ITEM = "drop"
 _EQUIP_ITEM = "equip"
@@ -29,11 +27,21 @@ _QUIT = "quit"
 _SAVE = "save"
 _OPEN = "open"
 
+EQUIP = "equip"
+UNEQUIP = "unequip"
+TORCH = "torch"
+POTION = "potion"
+MONSTER = "monster"
+ITEM = "item"
+WEAPON = "weapon"
+ARMOR = "armor"
+MERCHANT = "merchant"
+BUY = "buy"
+SELL = "sell"
+
 
 _PLAYER_COMMANDS = [
     _HELP,
-    _WIELD_ITEM,
-    _UNWIELD_ITEM,
     _TAKE_ITEM,
     _DROP_ITEM,
     _EQUIP_ITEM,
@@ -60,11 +68,9 @@ def displayHelpMenu():
     print("- HELP: Shows this menu.")
     print("- ATTACK <ENEMY>: Attack someone! Or something!")
     print("- STATUS: Display information about yourself.")
-    print("- WIELD <ITEM>: Wield a weapon from your inventory.")
-    print("- UNWIELD <ITEM>: Unwield your wielded weapon.")
     print("- TAKE <ITEM>: Add an item to your inventory.")
     print("- DROP <ITEM>: Discard of an item in your inventory.")
-    print("- EQUIP <ITEM>: Equip an item, such as a helmet.")
+    print("- EQUIP <ITEM>: Equip an item, such as a helmet or weapon.")
     print("- UNEQUIP <ITEM>: Remove an equipped item.")
     print("- INVENTORY: List all the items your are carrying.")
     print("- LOOT <TARGET>: Loot a slain enemy.")
@@ -86,6 +92,7 @@ def playerStatus():
     print(f"*\tPlayer Health: {player.getHP()} \t Armor: {player.getArmor()}")
     print(f"*\tStrength: {player.getStr()} \t\t Dexterity: {player.getDex()}")
     print(f"*\tCoins: {int(player.getCoin())}\t\t Weight: {player.getTotalWeight()}")
+    print(f"*\tWielded: {player.getWielded()}\t\t Equipped: {player.isEquipped('chestplate')}")
     print(49 * "*")
 
     
@@ -118,9 +125,9 @@ def movePlayer(userMovement, currentRoom):
 def attack(target, currentRoom):
     """Checks if target is in room and if true calls the letsFight() function."""
     if library.canPlayerSee(currentRoom):
-        for object in currentRoom.getObjects():
-            if object.getType().lower() == target.lower() and object.getObjectType() == "monster":
-                fight.letsFight(player, object)
+        for item in currentRoom.getObjects():
+            if item.getType().lower() == target.lower() and item.getObjectType() == MONSTER:
+                fight.letsFight(player, item)
                 return True
        
 def consume(item_to_consume, item_number=None):
@@ -131,7 +138,7 @@ def consume(item_to_consume, item_number=None):
             item_number = int(item_number)
             potion_list = []
             for item in player.getInventory():
-                if item.getObjectType() == "potion" and item_to_consume.lower() == "potion":
+                if item.getItemType() == POTION and item_to_consume.lower() == POTION:
                     potion_list.append(item)
             if item_number > len(potion_list) or item_number == 0:
                 return False
@@ -143,7 +150,7 @@ def consume(item_to_consume, item_number=None):
     
     else:
         for item in player.getInventory():
-            if item.getObjectType() == "potion" and item_to_consume.lower() == "potion":
+            if item.getItemType() == POTION and item_to_consume.lower() == POTION:
                 item.setPotionEffect(player)
             return True
 
@@ -156,78 +163,74 @@ def examineMonster(monster):
     for item in monster.getInventory():
         print(item.getType())
 
-#takes user input and prints info about it
 def examine(toLookAt, currentRoom):
-
+    """takes user input and examines thing depending on input"""
     if toLookAt == "room":
         library.printInterface(currentRoom)
     
     else :
-        for object in currentRoom.getObjects():
-            if object.getType().lower() == toLookAt.lower():
-                if object.getObjectType() == "monster":
-                    examineMonster(object)
-                elif object.getObjectType() in ("item", "potion"):
-                    print(object.getDesc())
-                elif object.getObjectType() == "merchant":
+        for item in currentRoom.getObjects():
+            if item.getType().lower() == toLookAt.lower():
+                if item.getObjectType() == MONSTER:
+                    examineMonster(item)
+                elif item.getObjectType() in (ITEM, POTION):
+                    print(item.getDesc())
+                elif item.getObjectType() == MERCHANT:
                     print("He has these items for sale: ")
-                    for item in object.getInventory():
-                        print(f"{item.getType().title()} for {int(item.getValue() * 1.2)} coins.")
+                    for thing in item.getInventory():
+                        print(f"{thing.getType().title()} for {int(thing.getValue() * 1.2)} coins.")
 
-        for object in player.getInventory():
-            if object.getType().lower() == toLookAt.lower():
-                if object.getObjectType() == "monster":
-                    examineMonster(object)
-                elif object.getObjectType() in ("item", "potion"):
-                    print(object.getDesc())       
+        for item in player.getInventory():
+            if item.getType().lower() == toLookAt.lower():
+                if item.getObjectType() == MONSTER:
+                    examineMonster(item)
+                elif item.getObjectType() in (ITEM, POTION):
+                    print(item.getDesc())       
 
- 
-            
-def manageEquipment(command, item):
-    """Check if you have armor in your inventory to equip and if you are wearing
-       any armor, then sets armor status to equipped accordingly."""
-    for armor in player.getInventory():
-        if armor.getItemType() == "armor" and armor.getType().lower() == item.lower():  
-            if command == "equip" and not player.isEquipped(item):
-                player.setEquipArmor(item)
-                player.setArmor(armor.getDamageMitigation())
-                return True      
-            elif command == "unequip" and player.isEquipped(item):
-                player.setUnequipArmor(item)
-                player.setArmor(-armor.getDamageMitigation())
-                return True
-        else:
-            print("You don't have that item.")
-    
-def manageWeapons(command, item):
+def manageGear(command, item):
     """Checks if you have weapon in inventory, if it is a weapon and if all 
        true changes wielded status accordingly."""
-    for weapon in player.getInventory():
-        if weapon.getType().lower() == item.lower() and weapon.getItemType() == "weapon":
-            if command == "wield" and not player.getWielded():
-                player.setWielded(weapon)
-                return True
-            elif command == "unwield" and weapon == player.getWielded():
-                player.setUnwield(weapon)
-                return True
-        else: 
-            print("I can't do that.")
-            return False
+    for thing in player.getInventory():
+        if thing.getType().lower() == item.lower():
+            if thing.getItemType() == WEAPON:
+                if command == EQUIP and not player.getWielded():
+                    player.setWielded(thing)
+                    return True
+                elif command == UNEQUIP and thing == player.getWielded():
+                    player.setUnwield(thing)
+                    return True
+                else:
+                    print(f"I've already done that.")
+                    return False
+            elif thing.getItemType() == ARMOR:
+                if command == EQUIP and not player.isEquipped(item):
+                    player.setEquipArmor(item)
+                    player.setArmor(thing.getDamageMitigation())
+                    return True      
+                elif command == UNEQUIP and player.isEquipped(item):
+                    player.setUnequipArmor(item)
+                    player.setArmor(-thing.getDamageMitigation())
+                    return True
+            else:
+                print("I can't use that item like that.") 
+                return False 
     else:
-        print("I don't have that item.")    
-        
+        print("I don't have that item.")   
+        return False
+   
 
-def trade(arg, object):
+def trade(arg, thing):
     """Trading items with the merchant!"""
-    if arg.lower() == "buy":
+    if arg.lower() == BUY:
         for item in merchant.getInventory():
-            if item.getType().lower() == object.lower() and player.getCoin() >= item.getValue():
+            if item.getType().lower() == thing.lower() and player.getCoin() >= item.getValue():
                 merchant.sell(item)
                 merchant.setCoin(int(item.getValue() * 1.2))
                 player.buy(item)
                 player.setCoin(int(-item.getValue() * 1.2))
                 player.getInventory().append(item)
                 merchant.getInventory().remove(item)
+                player.setTotalWeight(item.getWeight())
                 print(f"You purchased {item.getType()} for {int(item.getValue() * 1.2)} coins.")
                 return True
             else:
@@ -235,17 +238,18 @@ def trade(arg, object):
                 return False
         else:
             print("The Merchant says: 'I dont have that.'")
-    elif arg.lower() == "sell":
+    elif arg.lower() == SELL:
         for item in player.getInventory():
-            if item.getType().lower() == object.lower() and merchant.getCoin() >= item.getValue():
-                if item.getItemType() == "weapon":
-                    manageWeapons("unwield", object)
-                elif item.getItemType() == "armor":
-                    manageEquipment("unequip", object)
+            if item.getType().lower() == thing.lower() and merchant.getCoin() >= item.getValue():
+                if item.getItemType() == WEAPON:
+                    manageGear(UNEQUIP, thing)
+                elif item.getItemType() == ARMOR:
+                    manageGear(UNEQUIP, thing)
                 player.sell(item)
                 player.setCoin(int(item.getValue() * 0.8))
                 merchant.buy(item)
                 merchant.setCoin(int(-item.getValue() * 0.8))
+                player.setTotalWeight(-item.getWeight())
                 print(f"You sold {item.getType()} for {int(item.getValue() * 0.8)} coins.")
                 return True
             else:
@@ -261,7 +265,7 @@ def trade(arg, object):
 def takeItem(item_to_take, currentRoom):
     """If item in room inventory, remove from room and add to player inventory."""
     for item in currentRoom.getObjects():
-        if item.getObjectType() in ("item", "potion"):
+        if item.getObjectType() in (ITEM, POTION):
             if item.getType().lower() == item_to_take.lower() and library.checkWeight(item):
                 currentRoom.getObjects().remove(item)
                 player.getInventory().append(item)
@@ -274,10 +278,10 @@ def dropItem(item_to_drop, currentRoom):
     for item in player.getInventory():
         if item.getType().lower() == item_to_drop.lower():
             if item == player.getWielded():
-                manageWeapons("unwield",item_to_drop)
+                manageGear(UNEQUIP,item_to_drop)
             elif player.isEquipped(item_to_drop):
-                manageEquipment("unequip", item_to_drop)
-            elif item_to_drop == "torch":
+                manageGear(UNEQUIP, item_to_drop)
+            elif item_to_drop == TORCH:
                 item.setOnOff(False)
                 player.setIlluminated(False)
             currentRoom.getObjects().append(item)
@@ -296,20 +300,20 @@ def checkInventory():
 
 def loot(currentRoom, itemToLoot):
     """Checks if monsters are dead and adds their inventory to player inventory."""
-    for object in currentRoom.getObjects():
-        if object.getObjectType() == "monster" and object.getIsAlive() == False and object.getInventory():
-            while object.getInventory():
-                loot = object.getInventory().pop()
+    for item in currentRoom.getObjects():
+        if item.getObjectType() == MONSTER and item.getIsAlive() == False and item.getInventory():
+            while item.getInventory():
+                loot = item.getInventory().pop()
                 player.getInventory().append(loot)
             return True
 
 
 def light(item):
     """Checks if you have torch in inventory, lights it if true."""
-    for object in player.getInventory():
-        if object.getType().lower() == item.lower() and item.lower() == "torch":
-            if object.getOn() != True:
-                object.setOnOff(True)
+    for thing in player.getInventory():
+        if thing.getType().lower() == item.lower() and item.lower() == TORCH:
+            if thing.getOn() != True:
+                thing.setOnOff(True)
                 player.setIlluminated(True)
                 return True
             else:
@@ -323,13 +327,12 @@ def light(item):
 
 def extinguish(item):
     """Checks if torch is in player inventory and extinguishes if its lit."""
-    for object in player.getInventory():
-        if object.getType().lower() == item.lower() and object.getType() == "torch" and object.getOn():
-            object.setOnOff(False)
+    for thing in player.getInventory():
+        if thing.getType().lower() == item.lower() and thing.getType() == TORCH and thing.getOn():
+            thing.setOnOff(False)
             player.setIlluminated(False)
             return True
 
-def open():
-    for item in player.getInventory():
-        if item.getDesc() == "key":
-            
+#def open():
+#    for item in player.getInventory():
+#        if item.getDesc() == "key":

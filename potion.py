@@ -1,4 +1,5 @@
 from enum import Enum, IntEnum, auto
+from items_class import Item
 
 class PotionType(Enum):
     HP = auto()
@@ -12,13 +13,13 @@ class PotionSize(IntEnum):
     MEDIUM = 2
     BIG = 3
     
-class Flask():
+class Flask(Item):
     
     def __init__(self, potion: PotionType, potency: PotionSize):
         self._potion = potion
         self._potency = potency
-        self._objectType = "potion"
         self._weight = 1
+        self._itemType = "potion"
         
     def getWeight(self):
         return self._weight
@@ -33,7 +34,7 @@ class Flask():
 
         return self._potion
     
-    def getObjectType(self):
+    def getItemType(self):
         return self._objectType
 
     def getType(self):

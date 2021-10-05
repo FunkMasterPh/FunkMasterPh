@@ -6,6 +6,7 @@ import time, os
 import commands as cmd
 
 playername = input("What is your name? ")
+
 def loginPlayer(playername):
     """"""
     try:
@@ -14,23 +15,20 @@ def loginPlayer(playername):
     except IOError:
         return False
 
-def savePlayer(player):
 
-    
+def saveGame(player, caves):
+
     with open(f'{playername}/{player._name.lower()}.P', 'wb') as f:
         pickle.dump(player, f)
-
-def saveWorld(caves=None):
     
     with open(f'{playername}/{player._name.lower()}_caves.P', 'wb') as f:
         pickle.dump(caves, f)
-    
-   
+     
+
 def autoSave(caves):
     while True:
-        time.sleep(12)
-        savePlayer(player)  
-        saveWorld(caves)
+        saveGame(player, caves)  
+        time.sleep(60)
         
 
 if loginPlayer(playername):
@@ -41,5 +39,4 @@ else:
     player = Character(f'{playername.title()}', [])
     print(f"Character {player.getName()} created.") 
     os.mkdir(f'{playername}')
-
     

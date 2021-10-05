@@ -8,7 +8,7 @@ class Character:
         self._armor = 0
         self._level = 1
         self._hp = 100
-        self._str = 2
+        self._str = 4
         self._dex = 2
         self._isAlive = True
         self._damageModifier = 0
