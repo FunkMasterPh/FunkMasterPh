@@ -124,11 +124,8 @@ class Character:
     
     def setWielded(self, weapon):
         """checks if character is already wielded, if not sets wielded status to true and adds the weapons damage as a damage modifier"""
-        if self._wielded:
-            return False
-        else:
-            self._wielded = weapon
-            self._damageModifier += weapon.getDamage()
+        self._wielded = weapon
+        self._damageModifier += weapon.getDamage()
     
     def setUnwield(self, weapon):
         """sets character wielded status to false and removes weapons damage as damage modifier"""

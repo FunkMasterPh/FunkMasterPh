@@ -159,6 +159,8 @@ def parsePlayerCommand(playerCommand, currentRoom):
             saveWorld([cave_1, cave_2, cave_3, cave_4, cave_5])
             print("Leaving game.")
             sys.exit()
+        elif command[ACTION] == cmd._OPEN:
+            
                 
         return currentRoom
                 

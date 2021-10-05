@@ -27,6 +27,7 @@ _SELL = "sell"
 _ATTACK = "attack"
 _QUIT = "quit"
 _SAVE = "save"
+_OPEN = "open"
 
 
 _PLAYER_COMMANDS = [
@@ -49,7 +50,8 @@ _PLAYER_COMMANDS = [
     _SELL,
     _ATTACK, 
     _QUIT, 
-    _SAVE
+    _SAVE,
+    _OPEN
 ]   
 
 def displayHelpMenu():
@@ -83,7 +85,7 @@ def playerStatus():
     print(f"*\tPlayer Level: {player.getLevel()} \t XP: {player.getXP()}/{player.getLevel() * 200}")
     print(f"*\tPlayer Health: {player.getHP()} \t Armor: {player.getArmor()}")
     print(f"*\tStrength: {player.getStr()} \t\t Dexterity: {player.getDex()}")
-    print(f"*\tCoins: {int(player.getCoin())}")
+    print(f"*\tCoins: {int(player.getCoin())}\t\t Weight: {player.getTotalWeight()}")
     print(49 * "*")
 
     
@@ -202,15 +204,14 @@ def manageWeapons(command, item):
        true changes wielded status accordingly."""
     for weapon in player.getInventory():
         if weapon.getType().lower() == item.lower() and weapon.getItemType() == "weapon":
-            if command == "wield" and player.setWielded(weapon):
+            if command == "wield" and not player.getWielded():
+                player.setWielded(weapon)
                 return True
             elif command == "unwield" and weapon == player.getWielded():
                 player.setUnwield(weapon)
                 return True
-            else:
-                return False
         else: 
-            print("That's not a weapon.")
+            print("I can't do that.")
             return False
     else:
         print("I don't have that item.")    
@@ -264,7 +265,6 @@ def takeItem(item_to_take, currentRoom):
             if item.getType().lower() == item_to_take.lower() and library.checkWeight(item):
                 currentRoom.getObjects().remove(item)
                 player.getInventory().append(item)
-                print(player.getInventory())
                 player.setTotalWeight(item.getWeight())
                 return True
             
@@ -282,6 +282,7 @@ def dropItem(item_to_drop, currentRoom):
                 player.setIlluminated(False)
             currentRoom.getObjects().append(item)
             player.getInventory().remove(item)
+            player.setTotalWeight(-item.getWeight())
             return True
 
 
@@ -327,3 +328,8 @@ def extinguish(item):
             object.setOnOff(False)
             player.setIlluminated(False)
             return True
+
+def open():
+    for item in player.getInventory():
+        if item.getDesc() == "key":
+            

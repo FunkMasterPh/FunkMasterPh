@@ -1,5 +1,8 @@
 fixa chest och nyckel
 
+fixa autosave
+fixa så att vi sparar direkt när vi skapar en karaktär
+
 skapa mapp för varje spelare
 
 slå ihop light/extinguish

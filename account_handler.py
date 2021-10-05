@@ -1,3 +1,4 @@
+from character_class import Character
 from world_creator import *
 from world_class import World
 import pickle
@@ -26,7 +27,7 @@ def saveWorld(caves):
    
 def autoSave():
     while True:
-        time.sleep(120)
+        time.sleep(10)
         savePlayer(player)  
         saveWorld([cave_1, cave_2, cave_3, cave_4, cave_5])
         
@@ -34,13 +35,11 @@ def autoSave():
 if loginPlayer(playername):
     with open(f'{playername}/{playername.lower()}.P', 'rb') as f:
         player = pickle.load(f)
-        
+        print(f"Character {player.getName()} logged in.") 
 else:
     player = Character(f'{playername.title()}', [])
-
+    print(f"Character {player.getName()} created.") 
     os.mkdir(f'{playername}')
+    #savePlayer(player)
+    #saveWorld(cave_1, cave_2, cave_3, cave_4, cave_5)
     
-
-print(player.getName()) 
-print(player.getStr())
-

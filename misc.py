@@ -33,6 +33,9 @@ class Key(Item):
     
     def getDesc(self):
        return self._desc
+    
+    def getID(self):
+        return self._id
 
 
 class Lock(Item):
@@ -44,6 +47,9 @@ class Lock(Item):
 
     def getDesc(self):
         return self._desc
+    
+    def getID(self):
+        return self._id
             
   
 class Chest(Item):
