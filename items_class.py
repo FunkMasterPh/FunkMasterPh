@@ -5,7 +5,7 @@ class Item:
         self._weight = None
         self._value = None
         self._type = None
-        self._itemType = None
+        self._itemType = "item"
         self._objectType = "item"
         self._desc = None
 
@@ -73,7 +73,7 @@ class Potion(Item):
         self._isConsumable = True
         self._effect = effect
         self._potency = potency
-        self._itemType = Potion
+        self._itemType = "potion"
     
     #returns item description
     def getDesc(self):

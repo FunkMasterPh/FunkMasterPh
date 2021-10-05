@@ -50,8 +50,14 @@ class Lock(Item):
     
     def getID(self):
         return self._id
-            
-  
+    
+    def getLocked(self):
+        return self._isLocked
+        
+    def setLocked(self, arg):
+        self._isLocked = arg
+       
+
 class Chest(Item):
     def __init__(self, inventory: list, lock: Lock):
         super().__init__()
@@ -62,6 +68,8 @@ class Chest(Item):
         self._type = "chest"
         self._weight = 1000
         
+    def getLock(self):
+        return self._lock
 
     def getIsOpen(self):
         return self._isOpen

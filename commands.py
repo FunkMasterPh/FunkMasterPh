@@ -26,6 +26,7 @@ _ATTACK = "attack"
 _QUIT = "quit"
 _SAVE = "save"
 _OPEN = "open"
+_UNLOCK = "unlock"
 
 EQUIP = "equip"
 UNEQUIP = "unequip"
@@ -40,6 +41,10 @@ BUY = "buy"
 SELL = "sell"
 LIGHT = "light"
 EXTINGUISH = "extinguish"
+KEY = "key"
+CHEST = "chest"
+OPEN = "open"
+UNLOCK = "unlock"
 
 
 _PLAYER_COMMANDS = [
@@ -61,7 +66,8 @@ _PLAYER_COMMANDS = [
     _ATTACK, 
     _QUIT, 
     _SAVE,
-    _OPEN
+    _OPEN,
+    _UNLOCK
 ]   
 
 def displayHelpMenu():
@@ -269,7 +275,7 @@ def trade(arg, thing):
 def takeItem(item_to_take, currentRoom):
     """If item in room inventory, remove from room and add to player inventory."""
     for item in currentRoom.getObjects():
-        if item.getObjectType() in (ITEM, POTION):
+        if item.getObjectType() == ITEM:
             if item.getType().lower() == item_to_take.lower() and library.checkWeight(item):
                 currentRoom.getObjects().remove(item)
                 player.getInventory().append(item)
@@ -332,6 +338,41 @@ def lightExtinguish(command, item):
     else:
         print("I can't light that.")
             
-#def open():
-#    for item in player.getInventory():
-#        if item.getDesc() == "key":
+def openContainer(currentRoom, item):
+    for thing in currentRoom.getObjects():
+        if thing.getType() == CHEST and item.lower() == CHEST and not thing.getIsOpen(): 
+            if thing.getLock().getLocked():
+                print(f"The {item.lower()} is locked.")
+                return False
+            elif not thing.getLock().getLocked():
+                thing.setIsOpen(True)
+                print(f"The {item.lower()} opens.")
+                return True
+        elif thing.getType() == CHEST and item.lower() == CHEST and thing.getIsOpen(): 
+            print("It's already open.")
+    else:
+        print("You can't do that.")   
+        return False
+
+
+def unlock(currentRoom, item):
+    container = findObjectInRoom(currentRoom, item)
+    if container.getType() == item.lower():
+        if container.getLock().getID() == findObjectInPlayer(player, KEY).getID():
+            container.getLock().setLocked(False)
+            print("The lock is unlocked.")
+        else:
+            print("Nähä du!")
+    else:
+        print("You can't unlock that.")
+
+def findObjectInRoom(currentRoom, item):
+    for thing in currentRoom.getObjects():
+        if thing.getType() == item:
+            return thing
+
+
+def findObjectInPlayer(player, item):
+    for thing in player.getInventory():
+        if thing.getType() == item:
+            return thing

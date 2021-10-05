@@ -144,8 +144,9 @@ def parsePlayerCommand(playerCommand, currentRoom):
             print("Leaving game.")
             sys.exit()
         elif command[ACTION] == cmd._OPEN:
-            pass
-                
+            cmd.openContainer(currentRoom, command[TARGET])
+        elif command[ACTION] == cmd._UNLOCK:
+            cmd.unlock(currentRoom, command[TARGET])                
         return currentRoom
                 
     except IndexError:

@@ -54,8 +54,8 @@ try:
         cave_1, cave_2, cave_3, cave_4, cave_5 = caves
 
 except:
-    cave_1 = Room("It's the first cave.", [goblin1, troll1, key1, potion1, potion2, axe1, torch1])
-    cave_2 = Room("It's the second cave.", [goblin2, chest1, helmet1, chestplate1, sword1, sword2, sword3, sword4])
+    cave_1 = Room("It's the first cave.", [goblin1, troll1, potion1, potion2, axe1, torch1, key1])
+    cave_2 = Room("It's the second cave.", [goblin2, chest1, helmet1, chestplate1, sword2, sword3, sword4])
     cave_3 = Room("It's the third cave.", [goblin3])
     cave_4 = Room("It's the fourth cave.", [goblin4, troll2])
     cave_5 = Room("Its the merchant and his shop!", [merchant])

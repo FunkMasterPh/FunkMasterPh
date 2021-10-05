@@ -16,10 +16,12 @@ class PotionSize(IntEnum):
 class Flask(Item):
     
     def __init__(self, potion: PotionType, potency: PotionSize):
+        super().__init__()
         self._potion = potion
         self._potency = potency
         self._weight = 1
-        self._itemType = "potion"
+        self._type = "potion"
+        
         
     def getWeight(self):
         return self._weight
@@ -34,11 +36,11 @@ class Flask(Item):
 
         return self._potion
     
-    def getItemType(self):
+    def getObjectType(self):
         return self._objectType
 
     def getType(self):
-        return "potion"
+        return self._type
 
     def getDesc(self):
         """Returns a description of the potion, ranging from a small to big 
