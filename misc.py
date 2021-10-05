@@ -86,3 +86,6 @@ class Chest(Item):
 
     def setIsOpen(self, arg):
         self._isOpen = arg
+    
+    def getInventory(self):
+        return self._inventory

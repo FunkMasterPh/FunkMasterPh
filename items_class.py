@@ -56,6 +56,7 @@ class Armor(Item):
         self._armorLocation = armorLocation
         self._damageMitigation = damageMitigation
         self._weight = 10
+    
     def getArmorLocation(self):
         """Returns armor location."""
         return self._armorLocation
