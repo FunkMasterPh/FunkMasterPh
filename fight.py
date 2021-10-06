@@ -30,7 +30,7 @@ def letsFight(player, monster):
             print(f"The {monster.getType()} attacks you and does {player.takeDamage(monster.doDamage())} damage!")
             if player.getHP() <= 0:
                 print("You die.")
-                playerDeath(player.getName())
+                library.playerDeath(player.getName())
                 break
         else:
             print(f"The {monster.getType()} missed!")
