@@ -1,9 +1,9 @@
-fixa chest och nyckel open command
-
 planera upp spelet, fixa början , boss och slut
 
 städa upp/kommentera upp koden (typ gjort)
 
-in case of time:
+städa upp imports
 
-randomize 
+när man dör:
+"You die."
+delete spelarfil och mapp, sys.exit()

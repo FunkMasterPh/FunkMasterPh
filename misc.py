@@ -43,10 +43,7 @@ class Lock(Item):
         super().__init__()
         self._isLocked = True
         self._id = id
-        self._desc = ""
-
-    def getDesc(self):
-        return self._desc
+        self._desc = None
     
     def getID(self):
         return self._id
@@ -67,22 +64,19 @@ class Chest(Item):
         self._desc = "A treasure chest."
         self._type = "chest"
         self._weight = 1000
+        self._objectType = "chest"
         
     def getLock(self):
         return self._lock
 
     def getIsOpen(self):
         return self._isOpen
-    
-    def getIsOpenPrint(self):
-        if self._isOpen:
-            self._desc += "\nIt's open!"
-        elif not self._isOpen:
-            self._desc += "\nIt's closed."
-
+      
     def getDesc(self):
-        self.getIsOpenPrint()
-        return self._desc
+        if self._isOpen:
+            return self._desc + "\nIt's open!"
+        elif not self._isOpen:
+            return self._desc + "\nIt's closed."
 
     def setIsOpen(self, arg):
         self._isOpen = arg

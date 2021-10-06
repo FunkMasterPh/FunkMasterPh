@@ -15,8 +15,8 @@ def printInterface(currentRoom):
         print("Its too dark to see.")
     else:
         print(currentRoom.getRoomDesc())
-        for object in currentRoom.getObjects():
-            print(f"A "+object.getType() +".")
+        for item in currentRoom.getObjects():
+            print(f"A "+item.getType() +".")
         printVisibleExits(currentRoom)    
 
 def canPlayerSee(currentRoom):
@@ -63,9 +63,10 @@ def parsePlayerCommand(playerCommand, currentRoom):
 
         elif command[ACTION] == cmd._EXAMINE:
             if canPlayerSee(currentRoom):
-                print("Looking...")
-                time.sleep(1)
-                cmd.examine(command[TARGET], currentRoom)
+                if command[TARGET] == "room":
+                    printInterface(currentRoom)
+                else:
+                    cmd.examine(command[TARGET], currentRoom)
             else:
                 print("It´s too dark to see.")
 
@@ -85,17 +86,21 @@ def parsePlayerCommand(playerCommand, currentRoom):
                 print("You don't have that item.")
 
         elif command[ACTION] == cmd._INVENTORY:
-            cmd.checkInventory()
+            if player.getInventory():
+                print("You're carrying:")
+                cmd.printInventory(player)
 
         elif command[ACTION] == cmd._LOOT:
-            if cmd.loot(currentRoom, command[TARGET]):
-                print("You loot the body.")
+            if cmd.lootCheck(currentRoom, command[TARGET]):
+                print(f"You loot it.")
             else:
-                print("Nothing to loot.")
+                print("You can't loot that.")
 
         elif command[ACTION] == cmd._LIGHT:
             if cmd.lightExtinguish(command[ACTION], command[TARGET]):
                 print("You light the torch.")
+            elif not cmd.lightExtinguish(command[ACTION], command[TARGET]):
+                print("That can't be lit.")
 
         elif command[ACTION] == cmd._EXTINGUISH:
             if cmd.lightExtinguish(command[ACTION], command[TARGET]):
@@ -116,12 +121,12 @@ def parsePlayerCommand(playerCommand, currentRoom):
                 if cmd.consume(command[TARGET]):
                     print("You feel refreshed.")
                 else:
-                    print("Can't consume that!")
+                    print("You can't consume that!")
             elif len(command) == 3:
                 if cmd.consume(command[TARGET], command[NUMBER]):
                     print("You feel refreshed.")
                 else:
-                    print("Can't consume that!")
+                    print("You can't consume that!")
         
         elif command[ACTION] == cmd._BUY:
             if currentRoom == cave_5:
@@ -145,6 +150,7 @@ def parsePlayerCommand(playerCommand, currentRoom):
             sys.exit()
         elif command[ACTION] == cmd._OPEN:
             cmd.openContainer(currentRoom, command[TARGET])
+        
         elif command[ACTION] == cmd._UNLOCK:
             cmd.unlock(currentRoom, command[TARGET])                
         return currentRoom

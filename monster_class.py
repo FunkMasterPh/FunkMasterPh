@@ -11,7 +11,6 @@ class Monster:
         self._inventory = inventory
         self._desc = None
         self._isAlive = True
-        self._corpse = "decomposing body"
         self._corpseDesc = None
         self._objectType = "monster"
         self._giveXP = None
@@ -34,10 +33,10 @@ class Monster:
     
     #returns a monster type if monster is alive, if dead returns a corpse
     def getType(self):
-        if self._isAlive == True:
+        if self._isAlive:
             return self._type
         else:
-            return self._corpse
+            return "corpse"
     
     #returns a description of monster if monster is alive, if dead returns a description of corpse
     def getDesc(self):
