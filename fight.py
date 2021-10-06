@@ -4,6 +4,7 @@ from character_class import Character
 from world_creator import *
 import random
 import time
+from library import *
 
 def chanceToHit(attacker, defender):
     """randomises the chance to hit your target based on character and monster dexterity level"""
@@ -29,6 +30,7 @@ def letsFight(player, monster):
             print(f"The {monster.getType()} attacks you and does {player.takeDamage(monster.doDamage())} damage!")
             if player.getHP() <= 0:
                 print("You die.")
+                playerDeath(player.getName())
                 break
         else:
             print(f"The {monster.getType()} missed!")

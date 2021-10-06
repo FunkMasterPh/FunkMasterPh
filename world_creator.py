@@ -18,14 +18,13 @@ import pickle
 
 """**********Creating All Items**********"""
 potion1 = Flask(PotionType.HP, PotionSize.SMALL)
-potion2 = Flask(PotionType.DEX, PotionSize.SMALL)
+potion2 = Flask(PotionType.HP, PotionSize.MEDIUM)
+potion3 = Flask(PotionType.DEX, PotionSize.SMALL)
 axe1 = weapons.Axe()
 sword1 = weapons.Sword()
 sword2 = weapons.Sword()
 sword3 = weapons.Sword()
-
 sword4 = weapons.Sword()
-sword5 = weapons.Sword()
 torch1 = misc.Torch()
 torch2 = misc.Torch()
 axe2 = weapons.Axe()
@@ -33,18 +32,17 @@ helmet1 = Armor('helmet', 'head', 2)
 chestplate1 = Armor('chestplate', 'chest', 3)
 
 """**********Creating Objects**********"""
-goblin1 = Goblin([sword1])
-goblin2 = Goblin([])
-goblin3 = Goblin([])
-goblin4 = Goblin([])
-troll1 = Troll([axe2])
-troll2 = Troll([])
-
-merchant = Merchant([sword5])
-
 lock1 = misc.Lock(1)
-chest1 = misc.Chest([axe1], lock1)
+chest1 = misc.Chest([potion1], lock1)
 key1 = misc.Key(1, "A small key.")
+
+goblin1 = Goblin([sword1, potion3])
+goblin2 = Goblin([sword2, helmet1])
+goblin3 = Goblin([sword3])
+troll1 = Troll([axe1, key1, chestplate1])
+skelly1 = Skeleton([sword3])
+
+merchant = Merchant([sword4, axe2, potion2])
 
 """**********World Creation**********"""
 
@@ -54,10 +52,10 @@ try:
         cave_1, cave_2, cave_3, cave_4, cave_5 = caves
 
 except:
-    cave_1 = Room("It's the first cave.", [goblin1, torch1, chestplate1, potion1, potion2, helmet1, key1, axe1])
-    cave_2 = Room("It's the second cave.", [chest1])
+    cave_1 = Room("It's the first cave.", [goblin1])
+    cave_2 = Room("It's the second cave.", [chest1, troll1])
     cave_3 = Room("It's the third cave.", [goblin3])
-    cave_4 = Room("It's the fourth cave.", [troll2])
+    cave_4 = Room("It's the fourth cave.", [skelly1])
     cave_5 = Room("Its the merchant and his shop!", [merchant])
     caves = [cave_1, cave_2, cave_3, cave_4, cave_5]
 

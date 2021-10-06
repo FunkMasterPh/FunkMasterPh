@@ -59,7 +59,7 @@ class Skeleton(Monster):
         self._dex = 1
         self._type = "Skeleton"
         self._desc = "Walking set of bones!"
-        self._corpseDesc = "The body of a dead Skelly."
+        self._corpseDesc = "A pile of bones!."
         self._inventory = inventory
         self._giveXP = 20
 

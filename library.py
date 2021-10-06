@@ -4,6 +4,7 @@ from monster_class import Monster
 import commands as cmd
 from world_creator import *
 from account_handler import *
+import shutil
 
 ACTION = 0
 TARGET = 1
@@ -35,6 +36,15 @@ def checkWeight(item):
         print("It's too heavy!")
         return False
         
+def playerDeath(playername):
+    print("\nAn all encompassing voice bellows:\n")
+    print("VICTORY NEEDS NO EXPLANATION, DEFEAT ALLOWS NONE.\n")
+    print("The end.")
+    shutil.rmtree(f'{playername.lower()}')
+    sys.exit()
+
+
+
 
 #function for taking and handling user input
 def parsePlayerCommand(playerCommand, currentRoom):
