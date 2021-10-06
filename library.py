@@ -156,7 +156,8 @@ def parsePlayerCommand(playerCommand, currentRoom):
 
         elif command[ACTION] == cmd._QUIT:
             saveGame(player, caves)
-            print("Leaving game.")
+            print("An all encompassing voice bellows: \n")
+            print(f"SEIZE, {player.getName().upper()}.\nYOU SHALL SOON BE AGAIN.")
             sys.exit()
         elif command[ACTION] == cmd._OPEN:
             cmd.openContainer(currentRoom, command[TARGET])

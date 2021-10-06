@@ -34,9 +34,14 @@ def autoSave(caves):
 if loginPlayer(playername):
     with open(f'{playername}/{playername.lower()}.P', 'rb') as f:
         player = pickle.load(f)
-        print(f"Character {player.getName()} logged in.") 
+        print("An all encompassing voice bellows:\n")
+        print(f"BE AGAIN, {player.getName().upper()}")
 else:
     player = Character(f'{playername.title()}', [])
-    print(f"Character {player.getName()} created.") 
+    print("An all encompassing voice bellows:\n")
+    print("FROM NOTHING, SOMETHING.\n")
+    print(f"You slowly materialize in a cave. You're someone. You're {playername.title()}.")
+    print("Type 'help', and get going.")
     os.mkdir(f'{playername}')
     
+
