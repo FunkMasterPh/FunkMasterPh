@@ -1,48 +1,45 @@
 from merchant_class import Merchant
-from world_class import World
-from monster_class import Monster
-from character_class import Character
 from room_class import *
-from goblin_class import *
-from items_class import *
-from potion import *
-import misc
+from skeleton_class import Skeleton
+from troll_class import Troll
+from goblin_class import Goblin
+from potion_class import Potion
+from potionsize_class import PotionSize
+from potiontype_class import PotionType
+from torch_class import Torch
+from statue_class import Statue
+from lock_class import Lock
+from chest_class import Chest
+from key_class import Key
+from axe_class import Axe
+from sword_class import Sword
+from armor_class import Armor
 import account_handler as acc
-import time
-import library
-import random
-import fight
-import commands
 import pickle
 
 
 """**********Creating All Items**********"""
-potion1 = Flask(PotionType.HP, PotionSize.SMALL)
-potion2 = Flask(PotionType.HP, PotionSize.MEDIUM)
-potion3 = Flask(PotionType.DEX, PotionSize.SMALL)
-axe1 = weapons.Axe()
-sword1 = weapons.Sword()
-sword2 = weapons.Sword()
-sword3 = weapons.Sword()
-sword4 = weapons.Sword()
-torch1 = misc.Torch()
-torch2 = misc.Torch()
-axe2 = weapons.Axe()
-helmet1 = Armor('helmet', 'head', 2)
-chestplate1 = Armor('chestplate', 'chest', 3)
+potion_HP = Potion(PotionType.HP, PotionSize.BIG)
+potion_STR = Potion(PotionType.STR, PotionSize.MEDIUM)
+potion_DEX = Potion(PotionType.DEX, PotionSize.SMALL)
+axe = Axe()
+sword = Sword()
+torch = Torch()
+helmet = Armor('helmet', 'head', 2)
+chestplate = Armor('chestplate', 'chest', 3)
 
 """**********Creating Objects**********"""
-lock1 = misc.Lock(1)
-chest1 = misc.Chest([potion1], lock1)
-key1 = misc.Key(1, "A small key.")
 
-goblin1 = Goblin([sword1, potion3])
-goblin2 = Goblin([sword2, helmet1])
-goblin3 = Goblin([sword3])
-troll1 = Troll([axe1, key1, chestplate1])
-skelly1 = Skeleton([sword3])
+statue = Statue()
+lock = Lock(1)
+chest = Chest([statue], lock)
+key = Key(1, "A small key.")
 
-merchant = Merchant([sword4, axe2, potion2])
+goblin = Goblin([torch, sword])
+troll = Troll([key])
+skeleton = Skeleton([helmet, chestplate, axe])
+
+merchant = Merchant([potion_HP, potion_STR, potion_DEX])
 
 """**********World Creation**********"""
 
@@ -52,11 +49,11 @@ try:
         cave_1, cave_2, cave_3, cave_4, cave_5 = caves
 
 except:
-    cave_1 = Room("It's the first cave.", [goblin1])
-    cave_2 = Room("It's the second cave.", [chest1, troll1])
-    cave_3 = Room("It's the third cave.", [goblin3])
-    cave_4 = Room("It's the fourth cave.", [skelly1])
-    cave_5 = Room("Its the merchant and his shop!", [merchant])
+    cave_1 = Room("A dark and funky cave room.", [goblin])
+    cave_2 = Room("It's yet another dark and clammy cave room.", [chest])
+    cave_3 = Room("The area is scattered with bones.", [troll])
+    cave_4 = Room("A surprisingly tidy and clean area in the cave.", [skeleton])
+    cave_5 = Room("The area seems magical, with a magical shop.", [merchant])
     caves = [cave_1, cave_2, cave_3, cave_4, cave_5]
 
 
@@ -66,9 +63,9 @@ cave_1.setExitEast(cave_4)
 cave_1.setExitSouth(cave_5)
 
 cave_2.setExitEast(cave_1)
+cave_2.setDark(True)
 
 cave_3.setExitSouth(cave_1)
-cave_3.setDark(True)
 
 cave_4.setExitWest(cave_1)
 

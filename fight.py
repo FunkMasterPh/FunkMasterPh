@@ -1,10 +1,6 @@
-from monster_class import Monster
-from goblin_class import *
-from character_class import Character
-from world_creator import *
 import random
 import time
-from library import *
+import library as lib
 
 def chanceToHit(attacker, defender):
     """randomises the chance to hit your target based on character and monster dexterity level"""
@@ -16,7 +12,7 @@ def letsFight(player, monster):
     """starts a combat loop where if monster is defeated it sets monster alive status to false and it gives player experience"""
     while True:
         if chanceToHit(player, monster):
-            print(f"You attack the {monster.getType()} and do {monster.takeDamage(player.doDamage())} damage!")
+            print(f"You attack the {monster.getName()} and do {monster.takeDamage(player.doDamage())} damage!")
             if monster.getHP() <= 0:
                 print("You killed your foe.")
                 monster.setIsAlive(False)
@@ -27,14 +23,17 @@ def letsFight(player, monster):
         else:
             print("You missed!")
         if chanceToHit(monster, player):
-            print(f"The {monster.getType()} attacks you and does {player.takeDamage(monster.doDamage())} damage!")
+            print(f"The {monster.getName()} attacks you and does {player.takeDamage(monster.doDamage())} damage!")
             if player.getHP() <= 0:
                 print("You die.")
-                library.playerDeath(player.getName())
+                print("\nAn all encompassing voice bellows:\n")
+                print("VICTORY NEEDS NO EXPLANATION, DEFEAT ALLOWS NONE.\n")
+                print("The end.")
+                lib.endGame(player.getName())
                 break
         else:
-            print(f"The {monster.getType()} missed!")
+            print(f"The {monster.getName()} missed!")
         print(f"##### You: {player.getHP()} HP ************ ",
-        f"{monster.getType()}: {monster.getHP()} HP #####\n")
+        f"{monster.getName()}: {monster.getHP()} HP #####\n")
         time.sleep(2)
                

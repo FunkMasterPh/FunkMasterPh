@@ -1,5 +1,4 @@
 import random
-from items_class import *
 
 class Character:
     """Initializes a template for character creation."""
@@ -7,7 +6,7 @@ class Character:
         self._name = name
         self._armor = 0
         self._level = 1
-        self._hp = 1
+        self._hp = 40
         self._str = 1
         self._dex = 2
         self._isAlive = True
@@ -18,7 +17,7 @@ class Character:
         self._illuminated = False
         self._head = False
         self._chest = False
-        self._coin = 20
+        self._coin = 0
         self._totalWeight = 0
 
     def getTotalWeight(self):
@@ -155,7 +154,7 @@ class Character:
            
     def levelUp(self):
         """method for character to level up and get better stats"""
-        if self._xp >= self._level * 200:
+        if self._xp >= self._level * 40:
             self._hp += 10
             self._str += 1
             self._dex += 1

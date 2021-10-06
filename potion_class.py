@@ -1,27 +1,16 @@
-from enum import Enum, IntEnum, auto
+from potionsize_class import PotionSize
+from potiontype_class import PotionType
 from items_class import Item
-
-class PotionType(Enum):
-    HP = auto()
-    DEX = auto()
-    STR = auto()
-    XP = auto()
-    INVIS= auto()
-
-class PotionSize(IntEnum):
-    SMALL = 1
-    MEDIUM = 2
-    BIG = 3
-    
-class Flask(Item):
+ 
+class Potion(Item):
     
     def __init__(self, potion: PotionType, potency: PotionSize):
         super().__init__()
         self._potion = potion
         self._potency = potency
         self._weight = 1
-        self._type = "potion"
-        
+        self._name = "potion"
+        self._value = 10
         
     def getWeight(self):
         return self._weight
@@ -33,14 +22,13 @@ class Flask(Item):
         return self._potency
 
     def getPotionEffect(self):
-
         return self._potion
     
     def getObjectType(self):
         return self._objectType
 
-    def getType(self):
-        return self._type
+    def getName(self):
+        return self._name
 
     def getDesc(self):
         """Returns a description of the potion, ranging from a small to big 
@@ -53,20 +41,20 @@ class Flask(Item):
             flask_size = "big"
 
         if self._potion == PotionType.HP:
-            potion_type = "health"
+            potion_name = "health"
         elif self._potion == PotionType.STR:
-            potion_type = "strength"
+            potion_name = "strength"
         elif self._potion == PotionType.DEX:
-            potion_type = "dexterity"
+            potion_name = "dexterity"
         elif self._potion == PotionType.XP:
-            potion_type = "experience"
+            potion_name = "experience"
         elif self._potion == PotionType.INVIS:
-            potion_type = "invisibility"
+            potion_name = "invisibility"
 
-        return f"A {flask_size} potion of {potion_type}."    
+        return f"A {flask_size} potion of {potion_name}."    
     
     def setPotionEffect(self, player):
-
+        
         if self._potion == PotionType.HP:
             player.setHP(self._potency * 15)
 

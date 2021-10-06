@@ -1,5 +1,3 @@
-from abc import abstractmethod
-
 class Monster:
     """A template for creating a monster object."""
    
@@ -7,7 +5,7 @@ class Monster:
         self._hp = 40
         self._str = 1
         self._dex = 5
-        self._type = None
+        self._name = None
         self._inventory = inventory
         self._desc = None
         self._isAlive = True
@@ -18,62 +16,41 @@ class Monster:
     def giveXP(self):
         return self._giveXP
     
-    #returns monster health
     def getHP(self):
         return self._hp
 
-    #returns monster dexterity
     def getDex(self):
-
         return self._dex
     
-    #returns what type of object this is
     def getObjectType(self):
         return self._objectType
     
-    #returns a monster type if monster is alive, if dead returns a corpse
-    def getType(self):
+    def getName(self):
         if self._isAlive:
-            return self._type
+            return self._name
         else:
             return "corpse"
     
-    #returns a description of monster if monster is alive, if dead returns a description of corpse
     def getDesc(self):
         if self._isAlive == True:
             return self._desc
         else:
             return self._corpseDesc
 
-    #returns monster dead/alive status
     def getIsAlive(self):
         return self._isAlive
     
-    #returns monsters inventory
     def getInventory(self):
         return self._inventory
     
-    #changes monster dead/alive status
     def setIsAlive(self, arg):
         self._isAlive = arg
         
-    #changes monsters type
-    def setType(self, type):
-        self._type = type
-    
-    #changes monsters inventory
-    def setInventory(self, inventory: list):   
-        self._inventory = inventory
-    
-    #allows monster to take damage
     def takeDamage(self, dmg):
-        
         self._hp = self._hp - dmg
         return dmg
 
-    #allows monster to do damage
     def doDamage(self):
-
         return self._str
         
 

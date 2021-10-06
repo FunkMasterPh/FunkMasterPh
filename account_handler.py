@@ -1,14 +1,10 @@
 from character_class import Character
-from world_creator import *
-from world_class import World
 import pickle
 import time, os
-import commands as cmd
 
 playername = input("What is your name? ")
 
 def loginPlayer(playername):
-    """"""
     try:
         open(f'{playername}/{playername.lower()}.P')
         return True
@@ -17,7 +13,6 @@ def loginPlayer(playername):
 
 
 def saveGame(player, caves):
-
     with open(f'{playername}/{player._name.lower()}.P', 'wb') as f:
         pickle.dump(player, f)
     
