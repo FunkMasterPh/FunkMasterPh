@@ -1,8 +1,6 @@
 import sys, shutil
 import commands as cmd
-from account_handler import player, saveGame
-from world_creator import cave_5, caves
-from constants import KEY
+from account_handler import player
 
 
 """function for printing information about the room the player is in"""

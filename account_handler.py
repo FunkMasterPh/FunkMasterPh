@@ -1,6 +1,6 @@
 from character_class import Character
 import pickle
-import time, os
+import os
 
 playername = input("What is your name? ")
 
@@ -18,13 +18,7 @@ def saveGame(player, caves):
     
     with open(f'{playername}/{player._name.lower()}_caves.P', 'wb') as f:
         pickle.dump(caves, f)
-     
 
-def autoSave(caves):
-    while True:
-        saveGame(player, caves)  
-        time.sleep(60)
-        
 
 if loginPlayer(playername):
     with open(f'{playername}/{playername.lower()}.P', 'rb') as f:
